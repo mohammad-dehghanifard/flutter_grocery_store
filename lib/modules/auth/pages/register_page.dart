@@ -35,7 +35,7 @@ class RegisterPage extends StatelessWidget {
                   // full name
                   const TextFieldWidget(
                     hintText: "نام و نام خانوادگی",
-                    type: TextInputType.phone,
+                    type: TextInputType.text,
                     icon: Iconsax.user,
                   ),
               
