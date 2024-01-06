@@ -5,6 +5,7 @@ class ThemeHelper extends GetxController {
   ThemeData defaultThemeData = ThemeData(
       fontFamily: 'yekanBakh',
       primaryColor: const Color(0xFF14489E),
+      shadowColor: const Color(0xFF000000),
       primaryColorLight: const Color(0xFFED723F),
       scaffoldBackgroundColor: const Color(0xFFF8F8F8),
       dividerColor: const Color(0xFFE1E1E1),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_grocery_store/helper/theme_helper.dart';
+import 'package:flutter_grocery_store/helper/resource/theme_helper.dart';
 import 'package:flutter_grocery_store/modules/auth/pages/splash_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
