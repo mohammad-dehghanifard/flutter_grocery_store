@@ -59,7 +59,7 @@ class LoginPage extends StatelessWidget {
                       const Text("حساب کاربری ندارید؟ ",style: TextStyle(color: Color(0xFF8C8C8C))),
                       const SizedBox(width: 5),
                       GestureDetector(
-                          onTap: () => Get.to(const RegisterPage()),
+                          onTap: () => Get.off(const RegisterPage()),
                           child: Text("ثبت نام کنید",style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold))),
                     ],
                   )

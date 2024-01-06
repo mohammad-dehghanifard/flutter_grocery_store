@@ -6,12 +6,14 @@ class TextFieldWidget extends StatefulWidget {
     super.key,
     required this.hintText,
     this.icon,
-    this.type = TextInputType.text
+    this.type = TextInputType.text, this.controller,  this.validator
   });
 
   final String hintText;
   final IconData? icon;
   final TextInputType? type;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -24,6 +26,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
+      validator: widget.validator,
       obscureText: widget.type == TextInputType.visiblePassword ? obscure : false,
       keyboardType: widget.type,
       decoration: InputDecoration(
@@ -37,6 +41,14 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(color: Theme.of(context).dividerColor)
+        ),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Color(0xFFFF3D3D))
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Color(0xFFFF3D3D))
         ),
         hintText: widget.hintText,
         suffixIcon: widget.icon != null ||
