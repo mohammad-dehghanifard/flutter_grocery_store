@@ -16,6 +16,9 @@ class MainWidget extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      supportedLocales: [
+        Locale("fa","IR"),
+      ],
       locale: Locale("fa","IR"),
     );
   }
