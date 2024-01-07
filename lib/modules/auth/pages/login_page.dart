@@ -60,6 +60,7 @@ class LoginPage extends StatelessWidget {
                         // register button
                         ButtonWidget(
                             onPress: controller.login,
+                            loading: controller.loading,
                             text: "ورود"),
                         const SizedBox(height: 25),
                         // login btn

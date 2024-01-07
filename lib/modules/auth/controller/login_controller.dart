@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_grocery_store/backend/repository/auth_repository.dart';
+import 'package:flutter_grocery_store/helper/constants.dart';
+import 'package:flutter_grocery_store/modules/home/pages/home_page.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
 //========================= variable ===========================================
@@ -7,7 +11,9 @@ class LoginController extends GetxController {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final TextEditingController loginTextControllerMobile = TextEditingController();
   final TextEditingController loginTextControllerPassword = TextEditingController();
-
+  final AuthRepository _authRepository = AuthRepository();
+  bool loading = false;
+  SharedPreferences? prefs;
 
 //========================= methods ============================================
 
@@ -33,9 +39,33 @@ class LoginController extends GetxController {
 
   //#endregion
 
-  void login() {
-    if(loginFormKey.currentState!.validate()){}
+  Future<void> initialPrefs() async {
+    prefs = await SharedPreferences.getInstance();
   }
 
+
+  Future<void> login() async {
+    if(loginFormKey.currentState!.validate()){
+      loading = true;
+      update();
+      final res = await _authRepository.login(mobile: loginTextControllerMobile.text, password: loginTextControllerPassword.text);
+      // save token
+      if(res != null){
+        prefs!.setString(tokenKey, res.token!);
+        Get.to(const HomePage());
+      }
+      loading = false;
+      update();
+    }
+  }
+
+
+//========================= life cycle =========================================
+
+  @override
+  void onInit() {
+    initialPrefs();
+    super.onInit();
+  }
 
 }
