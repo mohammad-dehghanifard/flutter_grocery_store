@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_grocery_store/backend/repository/auth_repository.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
@@ -9,6 +10,7 @@ class RegisterController extends GetxController {
   final TextEditingController textControllerMobile = TextEditingController();
   final TextEditingController textControllerPassword = TextEditingController();
   final TextEditingController textControllerRepeatPass = TextEditingController();
+  final AuthRepository _authRepository = AuthRepository();
 
 
 //========================= methods ============================================
@@ -50,9 +52,14 @@ class RegisterController extends GetxController {
   //#endregion
 
   void register() {
-    if(formKey.currentState!.validate()){}
+    if(formKey.currentState!.validate()) {
+      _authRepository.register(
+          fullName: textControllerName.text,
+          mobile: textControllerMobile.text,
+          password: textControllerPassword.text,
+          confirmPass: textControllerRepeatPass.text);
+    }
   }
-
 
 }
 
