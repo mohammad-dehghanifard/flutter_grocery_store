@@ -11,6 +11,7 @@ class RegisterController extends GetxController {
   final TextEditingController textControllerPassword = TextEditingController();
   final TextEditingController textControllerRepeatPass = TextEditingController();
   final AuthRepository _authRepository = AuthRepository();
+  bool loading = false;
 
 
 //========================= methods ============================================
@@ -51,13 +52,17 @@ class RegisterController extends GetxController {
   }
   //#endregion
 
-  void register() {
+  void register() async {
     if(formKey.currentState!.validate()) {
-      _authRepository.register(
+      loading = true;
+      update();
+      await _authRepository.register(
           fullName: textControllerName.text,
           mobile: textControllerMobile.text,
           password: textControllerPassword.text,
           confirmPass: textControllerRepeatPass.text);
+      loading = false;
+      update();
     }
   }
 

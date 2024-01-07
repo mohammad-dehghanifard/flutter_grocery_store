@@ -77,6 +77,7 @@ class RegisterPage extends StatelessWidget {
                         // register button
                         ButtonWidget(
                             onPress: controller.register,
+                            loading: controller.loading,
                             text: "ثبت نام"),
                         const SizedBox(height: 25),
                         // login btn
