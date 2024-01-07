@@ -81,3 +81,9 @@ class ButtonNavigation extends StatelessWidget {
     );
   }
 }
+
+class MenuItem{
+  MenuItem({required this.icon,this.selected = false});
+  final IconData icon;
+  final bool selected;
+}

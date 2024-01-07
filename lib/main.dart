@@ -17,13 +17,14 @@ class MainWidget extends StatelessWidget {
       init: ThemeHelper(),
       builder: (controller) {
       return  GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: controller.defaultThemeData,
-        localizationsDelegates: [
+        localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: [
+        supportedLocales: const [
           Locale("fa","IR"),
         ],
         locale: const Locale("fa","IR"),

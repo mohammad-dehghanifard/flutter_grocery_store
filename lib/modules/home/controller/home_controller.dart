@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_grocery_store/modules/home/widgets/button_navigation.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -25,8 +26,3 @@ class HomeController extends GetxController {
 }
 
 
-class MenuItem{
-  MenuItem({required this.icon,this.selected = false});
-  final IconData icon;
-  final bool selected;
-}
