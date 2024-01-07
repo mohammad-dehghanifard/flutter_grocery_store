@@ -14,8 +14,19 @@ class HomePage extends StatelessWidget {
           return Scaffold(
             body: Column(
               children: [
-                const Spacer(),
-                // button navigation
+                Expanded(
+                  child: PageView(
+                  controller: controller.pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                  Container(color: Colors.redAccent),
+                  Container(color: Colors.green),
+                  Container(color: Colors.blue),
+                  Container(color: Colors.orange),
+                  Container(color: Colors.purple),
+                ],
+              )),
+              // button navigation
                 ButtonNavigation(controller: controller)
               ],
             ),
