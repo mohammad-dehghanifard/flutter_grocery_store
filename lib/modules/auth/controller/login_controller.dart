@@ -39,10 +39,10 @@ class LoginController extends GetxController {
 
   //#endregion
 
+
   Future<void> initialPrefs() async {
     prefs = await SharedPreferences.getInstance();
   }
-
 
   Future<void> login() async {
     if(loginFormKey.currentState!.validate()){
