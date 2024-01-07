@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/modules/home/controller/home_controller.dart';
+import 'package:flutter_grocery_store/modules/home/pages/dashboard_page.dart';
 import 'package:flutter_grocery_store/modules/home/widgets/button_navigation.dart';
 import 'package:flutter_grocery_store/modules/home/widgets/home_app_bar_widget.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,7 @@ class HomePage extends StatelessWidget {
                     controller: controller.pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                    Container(color: Colors.redAccent),
+                    const DashboardPage(),
                     Container(color: Colors.green),
                     Container(color: Colors.blue),
                     Container(color: Colors.orange),
