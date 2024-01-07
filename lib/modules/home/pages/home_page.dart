@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/modules/home/controller/home_controller.dart';
-import 'package:flutter_grocery_store/modules/home/widgets/app_bar_button.dart';
 import 'package:flutter_grocery_store/modules/home/widgets/button_navigation.dart';
+import 'package:flutter_grocery_store/modules/home/widgets/home_app_bar_widget.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,22 +17,8 @@ class HomePage extends StatelessWidget {
               child: Column(
                 children: [
                   //app bar
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        // bag
-                        AppBarButton(onTap: () {},icon: Iconsax.bag_2),
-                        const Spacer(),
-                        Image.asset("assets/images/logo_horiz.png",height: 45,),
-                        const Spacer(),
-                        // search
-                        AppBarButton(onTap: () {},icon: Iconsax.search_normal),
-                      ],
-                    ),
-                  ),
+                  const HomeAppBarWidget(),
+                  // pages
                   Expanded(
                     child: PageView(
                     controller: controller.pageController,
@@ -56,6 +41,8 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+
 
 
 
