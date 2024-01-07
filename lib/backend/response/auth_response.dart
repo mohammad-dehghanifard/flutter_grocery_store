@@ -1,12 +1,12 @@
 import 'package:flutter_grocery_store/backend/models/user_model.dart';
 
-class RegisterResponse {
+class AuthResponse {
   User? user;
   String? token;
 
-  RegisterResponse({this.user, this.token});
+  AuthResponse({this.user, this.token});
 
-  RegisterResponse.fromJson(Map<String, dynamic> json) {
+  AuthResponse.fromJson(Map<String, dynamic> json) {
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     token = json['token'];
   }

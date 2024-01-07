@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_grocery_store/backend/repository/auth_repository.dart';
+import 'package:flutter_grocery_store/helper/constants.dart';
+import 'package:flutter_grocery_store/modules/home/pages/home_page.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterController extends GetxController {
 //========================= variable ===========================================
@@ -12,6 +15,8 @@ class RegisterController extends GetxController {
   final TextEditingController textControllerRepeatPass = TextEditingController();
   final AuthRepository _authRepository = AuthRepository();
   bool loading = false;
+  SharedPreferences? prefs;
+
 
 
 //========================= methods ============================================
@@ -52,18 +57,35 @@ class RegisterController extends GetxController {
   }
   //#endregion
 
+  Future<void> initialPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
   void register() async {
     if(formKey.currentState!.validate()) {
       loading = true;
       update();
-      await _authRepository.register(
+     final res = await _authRepository.register(
           fullName: textControllerName.text,
           mobile: textControllerMobile.text,
           password: textControllerPassword.text,
           confirmPass: textControllerRepeatPass.text);
+     //save token and navigate to home screen
+     if(res != null){
+       prefs!.setString(tokenKey, res.token!);
+       Get.to(const HomePage());
+     }
       loading = false;
       update();
     }
+  }
+
+//========================= life cycle =========================================
+
+@override
+  void onInit() {
+    initialPrefs();
+    super.onInit();
   }
 
 }

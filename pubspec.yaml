@@ -40,6 +40,7 @@ dependencies:
   iconsax: ^0.0.8
   flutter_localizations:
     sdk: flutter
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

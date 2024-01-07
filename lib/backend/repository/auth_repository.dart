@@ -1,10 +1,10 @@
 import 'package:flutter_grocery_store/backend/repository/base_repository.dart';
-import 'package:flutter_grocery_store/backend/response/register_response.dart';
+import 'package:flutter_grocery_store/backend/response/auth_response.dart';
 import 'package:flutter_grocery_store/helper/widgets/snack_bars.dart';
 
 class AuthRepository extends BaseRepository {
 
-  Future<RegisterResponse> register(
+  Future<AuthResponse?> register(
       {required String fullName,
       required String mobile,
       required String password,
@@ -21,8 +21,9 @@ class AuthRepository extends BaseRepository {
       showSnackBar(message: "ثبت نام شما با موفقیت انجام شد!",type: SnackBarType.success);
     }else{
       showSnackBar(message: response.data['message'],type: SnackBarType.error);
+      return null;
     }
 
-    return RegisterResponse.fromJson(response.data);
+    return AuthResponse.fromJson(response.data);
   }
 }
