@@ -17,13 +17,33 @@ class AuthRepository extends BaseRepository {
     };
     final response = await dio.post("/register", data: data);
 
-    if(response.statusCode == 200){
-      showSnackBar(message: "ثبت نام شما با موفقیت انجام شد!",type: SnackBarType.success);
-    }else{
-      showSnackBar(message: response.data['message'],type: SnackBarType.error);
+    if (response.statusCode == 200) {
+      showSnackBar(
+          message: "ثبت نام شما با موفقیت انجام شد!",
+          type: SnackBarType.success);
+    } else {
+      showSnackBar(message: response.data['message'], type: SnackBarType.error);
       return null;
     }
 
+    return AuthResponse.fromJson(response.data);
+  }
+
+  Future<AuthResponse?> login({required String mobile, required String password}) async {
+    final Map<String, dynamic> data = {
+      "mobile": mobile,
+      "password": password,
+    };
+    final response = await dio.post("/login", data: data);
+
+    if (response.statusCode == 200) {
+      showSnackBar(
+          message: "با موفقیت وارد شدید!",
+          type: SnackBarType.success);
+    } else {
+      showSnackBar(message: response.data['message'], type: SnackBarType.error);
+      return null;
+    }
     return AuthResponse.fromJson(response.data);
   }
 }
