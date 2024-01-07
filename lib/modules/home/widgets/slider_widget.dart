@@ -28,7 +28,7 @@ class _SliderWidgetState extends State<SliderWidget> {
               });
             },
             autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 2),
+            autoPlayInterval: const Duration(seconds: 4),
           ),
           itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
             return SizedBox(

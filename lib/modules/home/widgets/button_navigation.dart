@@ -63,8 +63,8 @@ class ButtonNavigation extends StatelessWidget {
             child: GestureDetector(
               onTap: () => controller.changePage(0),
               child: Container(
-                width: 70,
-                height: 70,
+                width: 60,
+                height: 60,
                 decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
