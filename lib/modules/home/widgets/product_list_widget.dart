@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/backend/models/product.dart';
+import 'package:flutter_grocery_store/modules/product/pages/product_list_page.dart';
+import 'package:get/get.dart';
 
 import 'header_list_widget.dart';
 
@@ -13,7 +15,7 @@ class ProductListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Column(
       children: [
-        HeaderListWidget(title: listHeaderTitle,showMoreTap: () {}),
+        HeaderListWidget(title: listHeaderTitle,showMoreTap: () => Get.to(const ProductListPage())),
         const SizedBox(height: 15),
         // product list
         SizedBox(
