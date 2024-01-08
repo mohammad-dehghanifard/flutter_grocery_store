@@ -5,6 +5,8 @@ import 'package:flutter_grocery_store/modules/home/widgets/button_navigation.dar
 import 'package:flutter_grocery_store/modules/home/widgets/home_app_bar_widget.dart';
 import 'package:get/get.dart';
 
+import 'category_page.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -25,8 +27,8 @@ class HomePage extends StatelessWidget {
                     controller: controller.pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                    const DashboardPage(),
-                    Container(color: Colors.green),
+                      const DashboardPage(),
+                      const CategoryPage(),
                     Container(color: Colors.blue),
                     Container(color: Colors.orange),
                     Container(color: Colors.purple),

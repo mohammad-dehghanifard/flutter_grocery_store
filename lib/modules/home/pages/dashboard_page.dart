@@ -5,11 +5,17 @@ import 'package:flutter_grocery_store/modules/home/widgets/product_list_widget.d
 import 'package:flutter_grocery_store/modules/home/widgets/slider_widget.dart';
 import 'package:get/get.dart';
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
   @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return GetBuilder<DashBoardController>(
       init: DashBoardController(),
       builder: (controller) {
@@ -36,4 +42,7 @@ class DashboardPage extends StatelessWidget {
       }
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

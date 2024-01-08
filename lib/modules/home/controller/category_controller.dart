@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 class CategoryController extends GetxController {
   //========================= variable ===========================================
   final ProductRepository _productRepository = ProductRepository();
-  CategoryResponse? categories;
+  CategoryResponse? categoryData;
 
 //========================= methods ============================================
 
   Future<void> fetchAllCategory() async {
-    categories = await _productRepository.getAllCategories();
+    categoryData = await _productRepository.getAllCategories();
     update();
   }
 
