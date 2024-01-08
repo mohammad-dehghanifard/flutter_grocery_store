@@ -1,8 +1,9 @@
+import 'package:flutter_grocery_store/backend/models/category.dart';
 import 'package:flutter_grocery_store/backend/models/product.dart';
 
 class DashboardResponse {
   List<String>? sliders;
-  List<Categories>? categories;
+  List<Category>? categories;
   List<Product>? discountedProducts;
   List<Product>? latestProducts;
 
@@ -15,9 +16,9 @@ class DashboardResponse {
   DashboardResponse.fromJson(Map<String, dynamic> json) {
     sliders = json['sliders'].cast<String>();
     if (json['categories'] != null) {
-      categories = <Categories>[];
+      categories = <Category>[];
       json['categories'].forEach((v) {
-        categories!.add(Categories.fromJson(v));
+        categories!.add(Category.fromJson(v));
       });
     }
     if (json['discounted_products'] != null) {
@@ -52,26 +53,6 @@ class DashboardResponse {
   }
 }
 
-class Categories {
-  int? id;
-  String? title;
-  String? image;
 
-  Categories({this.id, this.title, this.image});
-
-  Categories.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    image = json['image'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['image'] = image;
-    return data;
-  }
-}
 
 
