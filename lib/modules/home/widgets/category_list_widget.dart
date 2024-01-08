@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery_store/backend/models/category.dart';
 import 'header_list_widget.dart';
 
 class CategoryListWidget extends StatelessWidget {
-  const CategoryListWidget({super.key});
+  const CategoryListWidget({super.key, required this.categoryList});
+
+  final List<Category> categoryList;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class CategoryListWidget extends StatelessWidget {
           height: 130,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
+            itemCount: categoryList.length,
             itemBuilder: (context, index) {
             return Column(
               children: [
@@ -33,12 +36,13 @@ class CategoryListWidget extends StatelessWidget {
                         blurRadius: 3,
                         offset: const Offset(0,1)
                       )
-                    ]
+                    ],
+                    border: Border.all(color: Theme.of(context).dividerColor,width: 1)
                   ),
-                  child: Image.network("https://dl.hitaldev.com/ecommerce/category_images/400967.png"),
+                  child: Image.network(categoryList[index].image ?? ""),
                 ),
                 const SizedBox(height: 5),
-                const Text("لبنیات",style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal))
+                 Text(categoryList[index].title ?? "",overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 15,fontWeight: FontWeight.normal))
               ],
             );
           },),

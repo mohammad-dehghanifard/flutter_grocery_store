@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery_store/backend/models/product.dart';
 
 import 'header_list_widget.dart';
 
 class ProductListWidget extends StatelessWidget {
-  const ProductListWidget({super.key, required this.listHeaderTitle});
+  const ProductListWidget({super.key, required this.listHeaderTitle, required this.products});
 
   final String listHeaderTitle;
+  final List<Product> products;
+
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -17,7 +20,7 @@ class ProductListWidget extends StatelessWidget {
           height: 200,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
+            itemCount: products.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding:  EdgeInsets.only(left: 15,right: index == 0 ? 20 : 0),
@@ -31,10 +34,12 @@ class ProductListWidget extends StatelessWidget {
                           // image product
                           Container(
                             height: 130,
+                            width: 118,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Theme.of(context).dividerColor,width: 1),
                                 boxShadow: [
                                   BoxShadow(
                                       color: const Color(0xFF14489E).withOpacity(0.15),
@@ -43,31 +48,37 @@ class ProductListWidget extends StatelessWidget {
                                   )
                                 ]
                             ),
-                            child: Image.network("https://dl.hitaldev.com/ecommerce/category_images/400967.png"),
+                            child: Image.network(products[index].image ?? ""),
                           ),
                           //off label
-                          Container(
-                            margin: const EdgeInsets.only(left: 20,top: 5),
-                            padding: const EdgeInsets.symmetric(horizontal: 4),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFF3D3D),
-                              borderRadius: BorderRadius.circular(6)
+                          Visibility(
+                            visible: products[index].discountPercent != 0,
+                            child: Container(
+                              margin: const EdgeInsets.only(left: 10,top: 5),
+                              padding: const EdgeInsets.symmetric(horizontal: 4),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFF3D3D),
+                                borderRadius: BorderRadius.circular(6)
+                              ),
+                              child:  Text("${products[index].discountPercent}%",style: const TextStyle(color: Colors.white,fontSize: 12,fontWeight: FontWeight.normal)),
                             ),
-                            child: const Text("30%",style: TextStyle(color: Colors.white,fontSize: 12,fontWeight: FontWeight.normal)),
                           )
                         ],
                       ),
+                      const SizedBox(height: 10),
                       // price
-                      const Row(
+                       Row(
                         children: [
-                          Text('۱۱,۰۰۰',style: TextStyle(fontSize: 14,fontWeight: FontWeight.normal)),
-                          Text('تومان',style: TextStyle(fontSize: 10,fontWeight: FontWeight.normal,color: Color(0xFF8C8C8C))),
-                          Spacer(),
-                          Text('۱۲,۰۰۰',style: TextStyle(fontSize: 14,fontWeight: FontWeight.normal,color: Color(0xFF8C8C8C),decoration: TextDecoration.lineThrough)),
+                          Text(products[index].price.toString(),style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal)),
+                          const Text('تومان',style: TextStyle(fontSize: 10,fontWeight: FontWeight.normal,color: Color(0xFF8C8C8C))),
+                          if(products[index].discountPercent != 0)...[
+                            const Spacer(),
+                            Text(products[index].realPrice.toString(),style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal,color: Color(0xFF8C8C8C),decoration: TextDecoration.lineThrough)),
+                          ],
                         ],
                       ),
                       const SizedBox(height: 5),
-                      const Text("لبنیات",style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal))
+                      Text(products[index].title ?? "",overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 15,fontWeight: FontWeight.normal))
                     ],
                   ),
                 ),
