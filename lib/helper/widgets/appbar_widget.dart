@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AppBarWidget extends StatelessWidget {
-  const AppBarWidget({super.key});
+  const AppBarWidget({super.key, required this.title});
+
+    final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class AppBarWidget extends StatelessWidget {
       ),
       child:  Stack(
         children: [
-          const Center(child: Text("محصولات",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700))),
+          Center(child: Text(title,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w700))),
           // back btn
           Align(
             alignment: Alignment.centerLeft,
