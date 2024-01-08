@@ -26,7 +26,6 @@ class DashboardPage extends StatelessWidget {
           ProductListWidget(listHeaderTitle: "تخفیف های شگفت انگیز"),
           SizedBox(height: 15),
           ProductListWidget(listHeaderTitle: "جدیدترین محصولات")
-          
         ],
       ),
     );
