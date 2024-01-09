@@ -1,4 +1,5 @@
 import 'package:flutter_grocery_store/backend/models/category.dart';
+import 'package:flutter_grocery_store/backend/models/product.dart';
 import 'package:flutter_grocery_store/backend/repository/product_repository.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +7,7 @@ class ProductListController extends GetxController {
 //========================= variable ===========================================
   final ProductRepository _productRepository = ProductRepository();
   List<Category>? categories;
+  List<Product>? products;
   int? categoryIndex;
 
 //========================= methods ============================================
