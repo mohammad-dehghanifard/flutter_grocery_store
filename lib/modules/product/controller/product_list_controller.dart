@@ -5,14 +5,16 @@ import 'package:flutter_grocery_store/backend/repository/product_repository.dart
 import 'package:get/get.dart';
 
 class ProductListController extends GetxController {
+  ProductListController({this.categoryDefaultId,this.defaultSort});
+  int? categoryDefaultId;
+  Sort? defaultSort;
 //========================= variable ===========================================
   final ProductRepository _productRepository = ProductRepository();
   final TextEditingController searchText = TextEditingController();
   List<Category>? categories;
   List<Product>? products;
   int? categoryIndex;
-  String? orderColumn;
-  String? orderType;
+  Sort? selectedSort;
 //========================= methods ============================================
 
   Future<void> getAllCategories() async {
@@ -22,7 +24,7 @@ class ProductListController extends GetxController {
   }
 
   Future<void> getProducts({String? keyword}) async {
-    final response = await _productRepository.filterProducts(categoryId: categoryIndex,keyWord: keyword,orderColumn: orderColumn,orderType: orderType);
+    final response = await _productRepository.filterProducts(categoryId: categoryIndex,keyWord: keyword,orderColumn: selectedSort?.orderColumn,orderType: selectedSort?.orderType);
     products = response.productList;
     update();
   }
@@ -34,8 +36,7 @@ class ProductListController extends GetxController {
   }
   void searchProduct(String? value) => getProducts(keyword: value);
   void sort(Sort sort) {
-    orderColumn = sort.orderColumn;
-    orderType = sort.orderType;
+    selectedSort = sort;
     update();
     getProducts();
   }
@@ -44,6 +45,8 @@ class ProductListController extends GetxController {
 //========================= life cycle =========================================
   @override
   void onInit() {
+    categoryIndex = categoryDefaultId;
+    selectedSort = defaultSort;
     getProducts();
     getAllCategories();
     super.onInit();
@@ -52,6 +55,6 @@ class ProductListController extends GetxController {
 
 class Sort {
   Sort({required this.orderColumn,required this.orderType});
-  final String orderColumn;
-  final String orderType;
+   String orderColumn;
+   String orderType;
 }

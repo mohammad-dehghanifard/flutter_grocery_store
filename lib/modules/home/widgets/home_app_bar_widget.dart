@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery_store/modules/product/pages/product_list_page.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'app_bar_button.dart';
 
@@ -21,7 +23,7 @@ class HomeAppBarWidget extends StatelessWidget {
           Image.asset("assets/images/logo_horiz.png",height: 45,),
           const Spacer(),
           // search
-          AppBarButton(onTap: () {},icon: Iconsax.search_normal),
+          AppBarButton(onTap: () => Get.to(const ProductListPage()),icon: Iconsax.search_normal),
         ],
       ),
     );

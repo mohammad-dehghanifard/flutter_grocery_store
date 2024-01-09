@@ -8,14 +8,16 @@ import 'package:flutter_grocery_store/modules/product/widgets/product_list_searc
 import 'package:get/get.dart';
 
 class ProductListPage extends StatelessWidget {
-  const ProductListPage({super.key});
+  const ProductListPage({super.key,this.categoryId,this.sort});
+  final int? categoryId;
+  final Sort? sort;
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       body: SafeArea(
         child: GetBuilder<ProductListController>(
-          init: ProductListController(),
+          init: ProductListController(categoryDefaultId: categoryId,defaultSort: sort),
           builder: (controller) {
             return controller.categories == null || controller.products == null ? const Center(child: CircularProgressIndicator()) :Column(
               children: [
