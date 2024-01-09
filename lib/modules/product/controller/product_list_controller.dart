@@ -18,14 +18,22 @@ class ProductListController extends GetxController {
     update();
   }
 
+  Future<void> getProducts() async {
+    final response = await _productRepository.filterProducts(categoryId: categoryIndex);
+    products = response.productList;
+    update();
+  }
+
   void selectCategory(int id){
     categoryIndex = id;
+    getProducts();
     update();
   }
 
 //========================= life cycle =========================================
   @override
   void onInit() {
+    getProducts();
     getAllCategories();
     super.onInit();
   }
