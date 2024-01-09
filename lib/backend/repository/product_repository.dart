@@ -15,11 +15,22 @@ class ProductRepository extends BaseRepository {
     return CategoryResponse.fromJson(response.data);
   }
 
-  Future<ProductResponse> filterProducts({int? categoryId}) async {
+  Future<ProductResponse> filterProducts({int? categoryId, String? keyWord,String? orderColumn,String? orderType}) async {
     Map<String,dynamic> queryPrams = {};
+    //#region check queryParameters
     if(categoryId != null){
-      queryPrams['category_id'] = categoryId;
+      queryPrams['category_id'] = categoryId.toString();
     }
+    if(keyWord != null){
+      queryPrams['keyword'] = keyWord;
+    }
+    if(orderColumn != null){
+      queryPrams['order_column'] = orderColumn;
+    }
+    if(orderType != null){
+      queryPrams['order_type'] = orderType;
+    }
+    //#endregion
     final response = await dio.get("/products",queryParameters: queryPrams);
     return ProductResponse.fromJson(response.data);
   }

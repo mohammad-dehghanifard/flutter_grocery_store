@@ -41,6 +41,8 @@ class ProductListPage extends StatelessWidget {
                               ]
                           ),
                           child: TextFormField(
+                            controller: controller.searchText,
+                            onChanged: (value) => controller.searchProduct(value),
                             decoration: const InputDecoration(
                               contentPadding: EdgeInsets.symmetric(horizontal: 12),
                               border: OutlineInputBorder(
@@ -55,32 +57,41 @@ class ProductListPage extends StatelessWidget {
                     ),
                     const SizedBox(width: 20),
                     // filter
-                    PopupMenuButton(
+                    PopupMenuButton<Sort>(
+                        onSelected: (sort) => controller.sort(sort),
                         position: PopupMenuPosition.under,
                         color: Colors.white,
                         surfaceTintColor: Colors.transparent,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         itemBuilder: (context) {
                           return [
-                             PopupMenuItem(child: Container(
+                             PopupMenuItem(
+                                 value: Sort(orderColumn:"id",orderType: "DESC"),
+                                 child: Container(
                                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                                 decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide(color: Color(0xFFDEDEDE),width: 1))
                                 ),
                                 child: const Center(child: Text("جدیدترین ها")))),
-                             PopupMenuItem(child: Container(
+                             PopupMenuItem(
+                                  value: Sort(orderColumn:"discount",orderType: "DESC"),
+                                 child: Container(
                                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                                 decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide(color: Color(0xFFDEDEDE),width: 1))
                                 ),
                                 child: const Center(child: Text("بیشترین تخفیف")))),
-                             PopupMenuItem(child: Container(
+                             PopupMenuItem(
+                                  value: Sort(orderColumn: "price",orderType: "Asc"),
+                                 child: Container(
                                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                                 decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide(color: Color(0xFFDEDEDE),width: 1))
                                 ),
                                 child: const Center(child: Text("ارزانترین")))),
-                             PopupMenuItem(child: Container(
+                             PopupMenuItem(
+                                 value: Sort(orderColumn:"price",orderType: "DESC"),
+                                 child: Container(
                                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                                 child: const Center(child: Text("گرانترین")))),
                           ];
