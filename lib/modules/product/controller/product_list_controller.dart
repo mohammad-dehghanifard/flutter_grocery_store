@@ -1,24 +1,30 @@
+import 'package:flutter_grocery_store/backend/models/category.dart';
 import 'package:flutter_grocery_store/backend/repository/product_repository.dart';
-import 'package:flutter_grocery_store/backend/response/category_response.dart';
 import 'package:get/get.dart';
 
-class CategoryController extends GetxController {
+class ProductListController extends GetxController {
 //========================= variable ===========================================
   final ProductRepository _productRepository = ProductRepository();
-  CategoryResponse? categoryData;
+  List<Category>? categories;
+  int? categoryIndex;
 
 //========================= methods ============================================
 
-  Future<void> fetchAllCategory() async {
-    categoryData = await _productRepository.getAllCategories();
+  Future<void> getAllCategories() async {
+    final response = await _productRepository.getAllCategories();
+    categories = response.categoryList;
+    update();
+  }
+
+  void selectCategory(int id){
+    categoryIndex = id;
     update();
   }
 
 //========================= life cycle =========================================
   @override
   void onInit() {
-    fetchAllCategory();
+    getAllCategories();
     super.onInit();
   }
-
 }
