@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class AppBarWidget extends StatelessWidget {
-  const AppBarWidget({super.key, required this.title});
+import 'app_bar_button_widget.dart';
 
-    final String title;
+class AppBarWidget extends StatelessWidget {
+  const AppBarWidget({super.key, this.title, this.action});
+
+    final String? title;
+    final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +27,18 @@ class AppBarWidget extends StatelessWidget {
       ),
       child:  Stack(
         children: [
-          Center(child: Text(title,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w700))),
+          Center(child: Text(title ?? "",style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w700))),
           // back btn
           Align(
             alignment: Alignment.centerLeft,
-            child: GestureDetector(
+            child: AppBarButtonWidget(
               onTap: () => Get.back(),
-              child: Container(
-                padding: const EdgeInsets.all(7),
-                margin: const EdgeInsets.only(left: 20),
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Theme.of(context).dividerColor)
-                ),
-                child: const Icon(Iconsax.arrow_left),
-              ),
-            ),
+              icon: Iconsax.arrow_left,
+            )
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: action ?? Container(),
           )
         ],
       ),
