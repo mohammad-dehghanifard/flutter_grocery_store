@@ -3,6 +3,7 @@ import 'package:flutter_grocery_store/backend/repository/base_repository.dart';
 import 'package:flutter_grocery_store/backend/response/category_response.dart';
 import 'package:flutter_grocery_store/backend/response/dash_board_response.dart';
 import 'package:flutter_grocery_store/backend/response/product_response.dart';
+import 'package:flutter_grocery_store/backend/response/review_response.dart';
 
 class ProductRepository extends BaseRepository {
   
@@ -40,6 +41,11 @@ class ProductRepository extends BaseRepository {
   Future<Product> getProductDetail({required int id}) async {
     final response = await dio.get("/products/$id");
     return Product.fromJson(response.data['data']);
+  }
+  // get product comments
+  Future<ReviewResponse> getAllProductReviews({required int id}) async {
+    final response = await dio.get("/product/$id/reviews");
+    return ReviewResponse.fromJson(response.data);
   }
 
 }
