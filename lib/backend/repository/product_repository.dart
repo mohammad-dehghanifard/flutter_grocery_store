@@ -39,7 +39,6 @@ class ProductRepository extends BaseRepository {
   // get product detail
   Future<Product> getProductDetail({required int id}) async {
     final response = await dio.get("/products/$id");
-    print(response.data['data'].toString());
     return Product.fromJson(response.data['data']);
   }
 

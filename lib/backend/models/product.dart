@@ -1,6 +1,7 @@
 class Product {
   int? id;
   String? title;
+  String? category;
   String? description;
   List<String>? gallery;
   int? reviewCount;
@@ -15,6 +16,7 @@ class Product {
       {this.id,
         this.title,
         this.description,
+        this.category,
         this.gallery,
         this.reviewCount,
         this.image,
@@ -32,6 +34,7 @@ class Product {
     if(json['gallery'] != null) {
       gallery = json['gallery'].cast<String>();
     }
+    category = json['category'];
     reviewCount = json["reviews_count"];
     cartCount = json["cart_count"];
     image = json['image'];

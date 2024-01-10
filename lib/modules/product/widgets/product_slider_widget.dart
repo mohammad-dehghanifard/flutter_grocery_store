@@ -27,7 +27,8 @@ class _ProductSliderWidgetState extends State<ProductSliderWidget> {
                 selectedImage = index;
               });
             },
-            autoPlay: true,
+            autoPlay: widget.imageList.length > 1,
+            scrollPhysics: widget.imageList.length > 1? const PageScrollPhysics() : const NeverScrollableScrollPhysics(),
             autoPlayInterval: const Duration(seconds: 4),
           ),
           itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
@@ -40,22 +41,25 @@ class _ProductSliderWidgetState extends State<ProductSliderWidget> {
           },
         ),
         // indicator
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(widget.imageList.length, (index) {
-              return AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                width: selectedImage == index? 25 : 8,
-                height:  8,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                decoration:  BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: selectedImage == index? Theme.of(context).primaryColor : const Color(0xFFD2D2D2)
-                ),
-              );
-            }) ,
+        Visibility(
+          visible: widget.imageList.length > 1,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(widget.imageList.length, (index) {
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: selectedImage == index? 25 : 8,
+                  height:  8,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration:  BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: selectedImage == index? Theme.of(context).primaryColor : const Color(0xFFD2D2D2)
+                  ),
+                );
+              }) ,
+            ),
           ),
         )
       ],

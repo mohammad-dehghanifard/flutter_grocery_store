@@ -30,7 +30,7 @@ class ProductListWidget extends StatelessWidget {
               return Padding(
                 padding:  EdgeInsets.only(left: 15,right: index == 0 ? 20 : 0),
                 child: GestureDetector(
-                  onTap: () => Get.to(const ProductDetailPage()),
+                  onTap: () => Get.to(ProductDetailPage(id: products[index].id!)),
                   child: SizedBox(
                     width: 118,
                     child: Column(
