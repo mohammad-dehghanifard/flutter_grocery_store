@@ -1,23 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_grocery_store/modules/product/pages/product_comment_page.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CommentButtonWidget extends StatelessWidget {
   const CommentButtonWidget({
     super.key,
-    this.reviewCount = 0
+    this.reviewCount = 0, required this.onTap
   });
 
   final int reviewCount;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: MaterialButton(
-        onPressed: () => Get.to(const ProductCommentPage()),
+        onPressed: onTap,
         minWidth: MediaQuery.sizeOf(context).width,
         height: 50,
         shape: RoundedRectangleBorder(

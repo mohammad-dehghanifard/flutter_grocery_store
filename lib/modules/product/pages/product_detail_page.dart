@@ -8,6 +8,8 @@ import 'package:flutter_grocery_store/modules/product/widgets/product_slider_wid
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import 'product_comment_page.dart';
+
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key, required this.id});
   final int id;
@@ -114,7 +116,9 @@ class ProductDetailPage extends StatelessWidget {
                                   ),
                                 ),
                                 // commentButton
-                                CommentButtonWidget(reviewCount: controller.product!.reviewCount ?? 0)
+                                CommentButtonWidget(
+                                    onTap: () =>  Get.to(ProductCommentPage(productId: id)),
+                                    reviewCount: controller.product!.reviewCount ?? 0)
                               ],
                             ),
                           ),
