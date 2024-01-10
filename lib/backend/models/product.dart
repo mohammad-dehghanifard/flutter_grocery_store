@@ -1,22 +1,39 @@
 class Product {
   int? id;
   String? title;
+  String? description;
+  List<String>? gallery;
+  int? reviewCount;
   String? image;
   String? price;
+  bool? bookMarked;
   String? realPrice;
   int? discountPercent;
+  int? cartCount;
 
   Product(
       {this.id,
         this.title,
+        this.description,
+        this.gallery,
+        this.reviewCount,
         this.image,
+        this.bookMarked,
         this.price,
         this.realPrice,
+        this.cartCount,
         this.discountPercent});
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
+    description = json["description"];
+    bookMarked = json['bookmarked'];
+    if(json['gallery'] != null) {
+      gallery = json['gallery'].cast<String>();
+    }
+    reviewCount = json["reviews_count"];
+    cartCount = json["cart_count"];
     image = json['image'];
     price = json['price'];
     realPrice = json['real_price'];
