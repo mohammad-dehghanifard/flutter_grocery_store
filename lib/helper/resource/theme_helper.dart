@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 class ThemeHelper extends GetxController {
   ThemeData defaultThemeData = ThemeData(
+      useMaterial3: false,
       fontFamily: 'yekanBakh',
       primaryColor: const Color(0xFF14489E),
       shadowColor: const Color(0xFF000000),
