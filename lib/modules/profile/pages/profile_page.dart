@@ -59,11 +59,33 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
+            // address
             IconButtonWidget(
               onTap: () {},
               icon: Iconsax.map,
               text: 'آدرس ها',
-            )
+            ),
+            const SizedBox(height: 15),
+            // orders
+            IconButtonWidget(
+              onTap: () {},
+              icon: Iconsax.shopping_bag,
+              text: 'سفارشات',
+            ),
+            const SizedBox(height: 15),
+            // share app
+            IconButtonWidget(
+              onTap: () {},
+              icon: Iconsax.user_cirlce_add,
+              text: 'دعوت از دوستان',
+            ),
+            const SizedBox(height: 15),
+            // log out
+            IconButtonWidget(
+              onTap: () {},
+              icon: Icons.logout,
+              text: 'خروج از حساب',
+            ),
           ],
         ));
   }
