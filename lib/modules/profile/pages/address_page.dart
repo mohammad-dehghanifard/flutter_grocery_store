@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/helper/widgets/appbar_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/button_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/icon_button_widget.dart';
+import 'package:flutter_grocery_store/modules/profile/pages/add_address_page.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AddressPage extends StatelessWidget {
@@ -87,7 +89,7 @@ class AddressPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ButtonWidget(
-                  onPress: () {},
+                  onPress: () => Get.to(const AddAddressPage()),
                   hasBorder: true,
                   text: "افزودن آدرس"
               ),
