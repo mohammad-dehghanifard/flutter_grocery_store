@@ -3,6 +3,8 @@ import 'package:flutter_grocery_store/backend/models/user_model.dart';
 import 'package:flutter_grocery_store/helper/widgets/appbar_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/button_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/text_field_widget.dart';
+import 'package:flutter_grocery_store/modules/profile/controller/edit_profile_controller.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class EditProfilePage extends StatelessWidget {
@@ -12,50 +14,60 @@ class EditProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            const AppBarWidget(title: "ویرایش پروفایل"),
+        child: GetBuilder<EditProfileController>(
+          init: EditProfileController(user),
+          builder: (controller) {
+            return Column(
+              children: [
+                const AppBarWidget(title: "ویرایش پروفایل"),
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-              child: Column(
-                children: [
-                  // full name
-                  const TextFieldWidget(
-                    hintText: "نام و نام خانوادگی",
-                    type: TextInputType.text,
-                    icon: Iconsax.user,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+                  child: Column(
+                    children: [
+                      // full name
+                       TextFieldWidget(
+                        controller: controller.userFullNameTextController,
+                        hintText: "نام و نام خانوادگی",
+                        type: TextInputType.text,
+                        icon: Iconsax.user,
+                      ),
+
+                      const SizedBox(height: 15),
+                      //mobile
+                       TextFieldWidget(
+                         controller: controller.userMobileController,
+                        hintText: "شماره موبایل",
+                        disabled: true,
+                        type: TextInputType.phone,
+                        icon: Iconsax.mobile,
+                      ),
+                      const SizedBox(height: 15),
+                      // password
+                       TextFieldWidget(
+                         controller: controller.userCurrentPassTextController,
+                        hintText: "رمزعبور قبلی",
+                        type: TextInputType.visiblePassword,
+                      ),
+                      const SizedBox(height: 15),
+                      // repeat pass
+                      TextFieldWidget(
+                        controller: controller.userNewPassTextController,
+                        hintText: "رمز عبور جدید",
+                        type: TextInputType.visiblePassword,
+                      ),
+                      const SizedBox(height: 25),
+
+                      ButtonWidget(
+                          onPress: () {},
+                          text: "ویرایش")
+
+                    ],
                   ),
-
-                  const SizedBox(height: 15),
-                  //mobile
-                  const TextFieldWidget(
-                    hintText: "شماره موبایل",
-                    type: TextInputType.phone,
-                    icon: Iconsax.mobile,
-                  ),
-                  const SizedBox(height: 15),
-                  // password
-                  const TextFieldWidget(
-
-                    hintText: "رمزعبور قبلی",
-                    type: TextInputType.visiblePassword,
-                  ),
-                  const SizedBox(height: 15),
-                  // repeat pass
-                  const TextFieldWidget(
-
-                    hintText: "رمز عبور جدید",
-                    type: TextInputType.visiblePassword,
-                  ),
-                  const SizedBox(height: 25),
-
-                  ButtonWidget(onPress: () {}, text: "ویرایش")
-
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            );
+          }
         ),
       ),
     );

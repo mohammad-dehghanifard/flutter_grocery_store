@@ -6,9 +6,14 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return  SingleChildScrollView(
@@ -16,22 +21,23 @@ class ProfilePage extends StatelessWidget {
         child: GetBuilder<ProfileController>(
           init: ProfileController(),
           builder: (controller) {
-            return Column(
+            return controller.user == null? const Center(child: CircularProgressIndicator()) : Column(
               children: [
+                // user information
                 Container(
                   width: MediaQuery.sizeOf(context).width,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: const Color(0xFFEBEBEB),width: 1),
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Theme.of(context).primaryColor.withOpacity(0.15),
-                        blurRadius: 3,
-                        offset: const Offset(0,1)
-                      )
-                    ]
+                      color: Colors.white,
+                      border: Border.all(color: const Color(0xFFEBEBEB),width: 1),
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Theme.of(context).primaryColor.withOpacity(0.15),
+                            blurRadius: 3,
+                            offset: const Offset(0,1)
+                        )
+                      ]
                   ),
                   child: Column(
                     children: [
@@ -58,9 +64,9 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           Icon(Iconsax.edit,size: 16,color: Theme.of(context).primaryColor),
                           const SizedBox(width: 4),
-                           GestureDetector(
-                             onTap: () => Get.to(EditProfilePage(user: controller.user!)),
-                               child: Text("ویرایش",style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor))),
+                          GestureDetector(
+                              onTap: () => Get.to(EditProfilePage(user: controller.user!)),
+                              child: Text("ویرایش",style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor))),
                         ],
                       )
                     ],
@@ -99,4 +105,7 @@ class ProfilePage extends StatelessWidget {
           }
         ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
