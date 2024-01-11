@@ -47,5 +47,13 @@ class ProductRepository extends BaseRepository {
     final response = await dio.get("/product/$id/reviews");
     return ReviewResponse.fromJson(response.data);
   }
-
+  // add comment for product
+  Future<bool> addComment({required int productId,required int rate , required String text}) async {
+    var response = await dio.post("/review",data: {
+      "product_id" : productId.toString(),
+      "rate" : rate.toString(),
+      "comment" : text
+    });
+    return response.statusCode == 200;
+  }
 }
