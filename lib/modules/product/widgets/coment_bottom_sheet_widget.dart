@@ -11,7 +11,7 @@ class CommentBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(30),
+      padding:  EdgeInsets.fromLTRB(30,30,30,MediaQuery.viewInsetsOf(context).bottom),
       child: GetBuilder<CommentController>(
         builder: (controller) {
           return  Column(
@@ -41,23 +41,28 @@ class CommentBottomSheet extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 // text field
-                TextFormField(
-                  controller: controller.commentTextController,
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(color: Color(0xFFE1E1E1))
-                      ),
-                      hintText: "نظر خود را وارد کنید",
-                      hintStyle: const TextStyle(color: Color(0xFFB4B4B4),fontSize: 16,fontWeight: FontWeight.normal)
+                Form(
+                  key: controller.commentFormKey,
+                  child: TextFormField(
+                    controller: controller.commentTextController,
+                    maxLines: 5,
+                    validator: controller.validateCommentForm,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: const BorderSide(color: Color(0xFFE1E1E1))
+                        ),
+                        hintText: "نظر خود را وارد کنید",
+                        hintStyle: const TextStyle(color: Color(0xFFB4B4B4),fontSize: 16,fontWeight: FontWeight.normal)
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
                 // send comment btn
                 ButtonWidget(
-                    onPress: () {},
-                    text: "ارسال نظر")
+                    onPress: controller.sendComment,
+                    text: "ارسال نظر"),
+                const SizedBox(height: 30),
               ]
           );
         },
