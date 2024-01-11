@@ -17,55 +17,63 @@ class EditProfilePage extends StatelessWidget {
         child: GetBuilder<EditProfileController>(
           init: EditProfileController(user),
           builder: (controller) {
-            return Column(
-              children: [
-                const AppBarWidget(title: "ویرایش پروفایل"),
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  const AppBarWidget(title: "ویرایش پروفایل"),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                  child: Column(
-                    children: [
-                      // full name
-                       TextFieldWidget(
-                        controller: controller.userFullNameTextController,
-                        hintText: "نام و نام خانوادگی",
-                        type: TextInputType.text,
-                        icon: Iconsax.user,
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+                    child: Form(
+                      key: controller.formKey,
+                      child: Column(
+                        children: [
+                          // full name
+                           TextFieldWidget(
+                            validator: controller.validateFullName,
+                            controller: controller.userFullNameTextController,
+                            hintText: "نام و نام خانوادگی",
+                            type: TextInputType.text,
+                            icon: Iconsax.user,
+                          ),
 
-                      const SizedBox(height: 15),
-                      //mobile
-                       TextFieldWidget(
-                         controller: controller.userMobileController,
-                        hintText: "شماره موبایل",
-                        disabled: true,
-                        type: TextInputType.phone,
-                        icon: Iconsax.mobile,
-                      ),
-                      const SizedBox(height: 15),
-                      // password
-                       TextFieldWidget(
-                         controller: controller.userCurrentPassTextController,
-                        hintText: "رمزعبور قبلی",
-                        type: TextInputType.visiblePassword,
-                      ),
-                      const SizedBox(height: 15),
-                      // repeat pass
-                      TextFieldWidget(
-                        controller: controller.userNewPassTextController,
-                        hintText: "رمز عبور جدید",
-                        type: TextInputType.visiblePassword,
-                      ),
-                      const SizedBox(height: 25),
+                          const SizedBox(height: 15),
+                          //mobile
+                           TextFieldWidget(
+                             controller: controller.userMobileController,
+                            hintText: "شماره موبایل",
+                            disabled: true,
+                            type: TextInputType.phone,
+                            icon: Iconsax.mobile,
+                          ),
+                          const SizedBox(height: 15),
+                          // password
+                           TextFieldWidget(
+                             validator: controller.validateOldPassword,
+                             controller: controller.userOldPassTextController,
+                            hintText: "رمزعبور قبلی",
+                            type: TextInputType.visiblePassword,
+                          ),
+                          const SizedBox(height: 15),
+                          // repeat pass
+                          TextFieldWidget(
+                            controller: controller.userNewPassTextController,
+                            hintText: "رمز عبور جدید",
+                            type: TextInputType.visiblePassword,
+                          ),
+                          const SizedBox(height: 25),
 
-                      ButtonWidget(
-                          onPress: () {},
-                          text: "ویرایش")
+                          ButtonWidget(
+                            loading: controller.loading,
+                              onPress: controller.editInformation,
+                              text: "ویرایش")
 
-                    ],
-                  ),
-                )
-              ],
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             );
           }
         ),
