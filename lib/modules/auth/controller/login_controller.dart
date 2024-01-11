@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_grocery_store/backend/repository/auth_repository.dart';
 import 'package:flutter_grocery_store/helper/constants.dart';
+import 'package:flutter_grocery_store/helper/user_helper.dart';
 import 'package:flutter_grocery_store/modules/home/pages/home_page.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,7 +52,8 @@ class LoginController extends GetxController {
       final res = await _authRepository.login(mobile: loginTextControllerMobile.text, password: loginTextControllerPassword.text);
       // save token
       if(res != null){
-        prefs!.setString(tokenKey, res.token!);
+       await prefs!.setString(tokenKey, res.token!);
+        Get.put(UserHelper(prefs!.getString(tokenKey)));
         Get.to(const HomePage());
       }
       loading = false;
