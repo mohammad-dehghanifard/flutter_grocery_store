@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 
 class SelectButton extends StatelessWidget {
   const SelectButton({
-    super.key, required this.onTap, required this.text,
+    super.key, required this.onTap, required this.text, this.showIcon = true
   });
   final Function() onTap;
   final String text;
+  final bool showIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,10 @@ class SelectButton extends StatelessWidget {
         ),
         child: Row(children: [
           Text(text,style: TextStyle(color: Theme.of(context).hintColor)),
-          const Spacer(),
-          Icon(CupertinoIcons.chevron_down,color:Theme.of(context).hintColor)
+          if(showIcon)...[
+            const Spacer(),
+            Icon(CupertinoIcons.chevron_down,color:Theme.of(context).hintColor)
+          ]
         ]),
       ),
     );

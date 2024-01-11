@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/helper/widgets/appbar_widget.dart';
+import 'package:flutter_grocery_store/helper/widgets/button_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/text_field_widget.dart';
 import 'package:flutter_grocery_store/modules/profile/widgets/select_button.dart';
+import 'package:flutter_grocery_store/modules/profile/widgets/select_province_bottom_sheet.dart';
 
 class AddAddressPage extends StatelessWidget {
   const AddAddressPage({super.key});
@@ -21,13 +22,23 @@ class AddAddressPage extends StatelessWidget {
                 child: Column(
                   children: [
                     const TextFieldWidget(hintText: "عنوان آدرس"),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     // select province and city button
                     Row(
                       children: [
                         Expanded(
                           child: SelectButton(
-                              onTap: () {},
+                              onTap: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(25),
+                                        topLeft: Radius.circular(25),
+                                      )
+                                    ),
+                                    builder: (context) => const SelectProvinceButtonSheet());
+                              },
                             text: "استان",
                           ),
                         ),
@@ -39,7 +50,16 @@ class AddAddressPage extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    const SizedBox(height: 15),
+                    const TextFieldWidget(hintText: "آدرس"),
+                    const SizedBox(height: 15),
+                    const TextFieldWidget(hintText: "کدپستی",type: TextInputType.number),
+                    const SizedBox(height: 15),
+                    SelectButton(onTap: () {}, text: "انتخاب موقعیت مکانی روی نقشه",showIcon: false),
+                    const SizedBox(height: 30),
+                    // save address button
+                    ButtonWidget(onPress: () {}, text: "افزودن آدرس")
                   ],
                 ),
               ))
