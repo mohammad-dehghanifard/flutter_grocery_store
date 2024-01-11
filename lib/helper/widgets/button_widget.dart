@@ -5,6 +5,7 @@ class ButtonWidget extends StatelessWidget {
     this.width = double.infinity,
     this.height = 45,
     this.loading = false,
+    this.hasBorder = false,
     required this.onPress,
     required this.text,
     super.key
@@ -15,19 +16,39 @@ class ButtonWidget extends StatelessWidget {
   final String text;
   final Function() onPress;
   final bool loading;
+  final bool hasBorder;
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       minWidth: double.infinity,
       height: 45,
-      color: Theme.of(context).primaryColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      color: hasBorder? Colors.transparent : Theme.of(context).primaryColor,
+      elevation: 0,
+      highlightElevation: 0,
+      shape: RoundedRectangleBorder(
+          side: BorderSide(color: hasBorder? Theme.of(context).primaryColor : Colors.transparent),
+          borderRadius: BorderRadius.circular(12)),
       onPressed: loading? (){} : onPress,
       child: loading? const SizedBox(
           width: 20,
           height: 20,
-          child: CircularProgressIndicator(color: Colors.white,)) : Text(text,style: const TextStyle(color: Color(0xFFF8F8F8),fontSize: 16,fontWeight: FontWeight.normal)),
+          child: CircularProgressIndicator(color: Colors.white,)) : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if(hasBorder)
+              Padding(
+                padding: const EdgeInsets.only(left: 4.0),
+                child: Icon(Icons.add,size: 20,color: Theme.of(context).primaryColor),
+              ),
+              Text(
+                  text,
+                  style: TextStyle(
+                      color: hasBorder? Theme.of(context).primaryColor : const Color(0xFFF8F8F8),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700)),
+            ],
+          ),
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/modules/profile/controller/profile_controller.dart';
+import 'package:flutter_grocery_store/modules/profile/pages/address_page.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/edit_profile_page.dart';
-import 'package:flutter_grocery_store/modules/profile/widgets/icon_button_widget.dart';
+import 'package:flutter_grocery_store/modules/profile/widgets/profile_button_widget.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -74,28 +75,28 @@ class _ProfilePageState extends State<ProfilePage> with AutomaticKeepAliveClient
                 ),
                 const SizedBox(height: 15),
                 // address
-                IconButtonWidget(
-                  onTap: () {},
+                ProfileButtonWidget(
+                  onTap: () => Get.to(const AddressPage()),
                   icon: Iconsax.map,
                   text: 'آدرس ها',
                 ),
                 const SizedBox(height: 15),
                 // orders
-                IconButtonWidget(
+                ProfileButtonWidget(
                   onTap: () {},
                   icon: Iconsax.shopping_bag,
                   text: 'سفارشات',
                 ),
                 const SizedBox(height: 15),
                 // share app
-                IconButtonWidget(
+                ProfileButtonWidget(
                   onTap: () {},
                   icon: Iconsax.user_cirlce_add,
                   text: 'دعوت از دوستان',
                 ),
                 const SizedBox(height: 15),
                 // log out
-                IconButtonWidget(
+                ProfileButtonWidget(
                   onTap: () {},
                   icon: Icons.logout,
                   text: 'خروج از حساب',

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-class IconButtonWidget extends StatelessWidget {
-  const IconButtonWidget({super.key, required this.text, required this.onTap, required this.icon});
+class ProfileButtonWidget extends StatelessWidget {
+  const ProfileButtonWidget({super.key, required this.text, required this.onTap, required this.icon});
 
 
   final String text;

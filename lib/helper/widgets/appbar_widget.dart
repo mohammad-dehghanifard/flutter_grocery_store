@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'app_bar_button_widget.dart';
+import 'icon_button_widget.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({super.key, this.title, this.action});
@@ -31,7 +31,7 @@ class AppBarWidget extends StatelessWidget {
           // back btn
           Align(
             alignment: Alignment.centerLeft,
-            child: AppBarButtonWidget(
+            child: IconButtonWidget(
               onTap: () => Get.back(),
               icon: Iconsax.arrow_left,
             )

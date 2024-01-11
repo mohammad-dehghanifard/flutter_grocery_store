@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_grocery_store/helper/widgets/app_bar_button_widget.dart';
+import 'package:flutter_grocery_store/helper/widgets/icon_button_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/appbar_widget.dart';
 import 'package:flutter_grocery_store/modules/product/controller/product_detail_controller.dart';
 import 'package:flutter_grocery_store/modules/product/widgets/add_product_to_cart_widget.dart';
@@ -22,7 +22,7 @@ class ProductDetailPage extends StatelessWidget {
           builder: (controller) {
             return Column(
               children: [
-                AppBarWidget(action: AppBarButtonWidget(icon: Iconsax.heart,onTap: (){})),
+                AppBarWidget(action: IconButtonWidget(icon: Iconsax.heart,onTap: (){})),
                 Expanded(
                     child: controller.product == null
                         ? const Center(child: CircularProgressIndicator())
