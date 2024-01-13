@@ -26,7 +26,6 @@ class ProfileRepository extends BaseRepository {
   // get province
   Future<ProvinceResponse> getAllProvince() async {
     var response = await dio.get("/provinces");
-    print(response.data);
-    return ProvinceResponse.fromJson(response.data['data']);
+    return ProvinceResponse.fromJson(response.data);
   }
 }
