@@ -1,5 +1,6 @@
 import 'package:flutter_grocery_store/backend/models/user_model.dart';
 import 'package:flutter_grocery_store/backend/repository/base_repository.dart';
+import 'package:flutter_grocery_store/backend/response/perovince_response.dart';
 import 'package:flutter_grocery_store/helper/widgets/snack_bars.dart';
 
 class ProfileRepository extends BaseRepository {
@@ -21,5 +22,11 @@ class ProfileRepository extends BaseRepository {
       showSnackBar(message: response.data['message'], type: SnackBarType.error);
     }
     return response.statusCode == 200;
+  }
+  // get province
+  Future<ProvinceResponse> getAllProvince() async {
+    var response = await dio.get("/provinces");
+    print(response.data);
+    return ProvinceResponse.fromJson(response.data['data']);
   }
 }
