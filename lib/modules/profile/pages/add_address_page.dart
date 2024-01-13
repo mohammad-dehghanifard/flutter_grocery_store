@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/helper/widgets/appbar_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/button_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/text_field_widget.dart';
+import 'package:flutter_grocery_store/modules/profile/pages/map_page.dart';
 import 'package:flutter_grocery_store/modules/profile/widgets/select_button.dart';
 import 'package:flutter_grocery_store/modules/profile/widgets/select_province_bottom_sheet.dart';
+import 'package:get/get.dart';
 
 class AddAddressPage extends StatelessWidget {
   const AddAddressPage({super.key});
@@ -56,10 +58,10 @@ class AddAddressPage extends StatelessWidget {
                     const SizedBox(height: 15),
                     const TextFieldWidget(hintText: "کدپستی",type: TextInputType.number),
                     const SizedBox(height: 15),
-                    SelectButton(onTap: () {}, text: "انتخاب موقعیت مکانی روی نقشه",showIcon: false),
+                    SelectButton(onTap: () => Get.to(const MapPage()), text: "انتخاب موقعیت مکانی روی نقشه",showIcon: false),
                     const SizedBox(height: 30),
                     // save address button
-                    ButtonWidget(onPress: () {}, text: "افزودن آدرس")
+                    ButtonWidget(onPress: (){}, text: "افزودن آدرس")
                   ],
                 ),
               ))
