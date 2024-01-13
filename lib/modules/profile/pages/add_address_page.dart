@@ -58,7 +58,9 @@ class AddAddressPage extends StatelessWidget {
                     const SizedBox(height: 15),
                     const TextFieldWidget(hintText: "کدپستی",type: TextInputType.number),
                     const SizedBox(height: 15),
-                    SelectButton(onTap: () => Get.to(const MapPage()), text: "انتخاب موقعیت مکانی روی نقشه",showIcon: false),
+                    SelectButton(onTap: () => Get.to(MapPage(onSelected: (latlang) => print(latlang),)),
+                        text: "انتخاب موقعیت مکانی روی نقشه",
+                        showIcon: false),
                     const SizedBox(height: 30),
                     // save address button
                     ButtonWidget(onPress: (){}, text: "افزودن آدرس")
