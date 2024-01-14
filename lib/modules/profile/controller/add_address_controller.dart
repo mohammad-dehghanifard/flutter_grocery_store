@@ -4,6 +4,7 @@ import 'package:flutter_grocery_store/backend/models/province.dart';
 import 'package:flutter_grocery_store/backend/repository/profile_repository.dart';
 import 'package:flutter_grocery_store/backend/response/perovince_response.dart';
 import 'package:flutter_grocery_store/helper/widgets/snack_bars.dart';
+import 'package:flutter_grocery_store/modules/profile/controller/address_controller.dart';
 import 'package:get/get.dart';
 
 class AddAddressController extends GetxController {
@@ -71,6 +72,7 @@ class AddAddressController extends GetxController {
        loading = false;
        update();
        Get.back();
+       Get.find<AddressController>().getAllAddress();
        showSnackBar(message: "آدرس با موفقیت اضافه شد", type: SnackBarType.success);
       } else {
         showSnackBar(message: "لطفا یک استان و شهر انتخاب کنید", type: SnackBarType.error);
