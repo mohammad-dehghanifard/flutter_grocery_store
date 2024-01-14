@@ -28,4 +28,21 @@ class ProfileRepository extends BaseRepository {
     var response = await dio.get("/provinces");
     return ProvinceResponse.fromJson(response.data);
   }
+  // add new address
+  Future<bool> addNewAddress({required String name,required String address,required int cityId,String? postalCode,String? latlong}) async {
+    var response = await dio.post("/address",data: {
+      "title": name,
+      "city_id": cityId.toString(),
+      "address": address,
+      "latlong": latlong,
+      "postal_code": postalCode
+    });
+    // show snack bar
+    if(response.statusCode == 200){
+      showSnackBar(message: "آدرس با موفقیت اضافه شد", type: SnackBarType.success);
+    }else{
+      showSnackBar(message: "خطایی رخ داده لطفا دوباره امتحان کنید", type: SnackBarType.error);
+    }
+    return response.statusCode == 200;
+  }
 }
