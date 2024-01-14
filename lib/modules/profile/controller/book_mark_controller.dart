@@ -14,6 +14,14 @@ class BookMarkController extends GetxController {
     update();
   }
 
+  Future<void> removeBookmarkedProduct({required int id}) async {
+    var response = await _repository.addOrRemoveBookMark(id: id);
+    if(response){
+      productResponse!.productList!.removeWhere((product) => product.id == id);
+      update();
+    }
+  }
+
 
 //========================= life cycle =========================================
   @override
