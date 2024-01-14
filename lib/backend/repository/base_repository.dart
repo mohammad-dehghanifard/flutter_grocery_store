@@ -11,6 +11,7 @@ class BaseRepository {
       followRedirects: false,
       headers: {
         "Accept" : "application/json",
+        if(Get.isRegistered<UserHelper>())
         "Authorization" : "Bearer ${Get.find<UserHelper>().token}"
       }
   ));
