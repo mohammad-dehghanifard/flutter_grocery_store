@@ -25,11 +25,16 @@ class AddAddressPage extends StatelessWidget {
                 children: [
                   const AppBarWidget(title: "افزودن آدرس"),
                   Form(
+                    key: controller.formKey,
                       child: Padding(
                         padding: const EdgeInsets.all(20),
                         child: Column(
                           children: [
-                            const TextFieldWidget(hintText: "عنوان آدرس"),
+                            // address title
+                             TextFieldWidget(
+                                controller: controller.titleText,
+                                validator: controller.validateAddressName,
+                                hintText: "عنوان آدرس"),
                             const SizedBox(height: 15),
                             // select province and city button
                             Row(
@@ -86,16 +91,27 @@ class AddAddressPage extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 15),
-                            const TextFieldWidget(hintText: "آدرس"),
+                            // address
+                            TextFieldWidget(
+                                controller: controller.addressText,
+                                validator: controller.validateAddress,
+                                hintText: "آدرس"),
                             const SizedBox(height: 15),
-                            const TextFieldWidget(hintText: "کدپستی",type: TextInputType.number),
+                            // postal code
+                            TextFieldWidget(
+                                controller: controller.postalCodeText,
+                                hintText: "کدپستی",
+                                type: TextInputType.number),
                             const SizedBox(height: 15),
-                            SelectButton(onTap: () => Get.to(MapPage(onSelected: (latlang) => print(latlang),)),
-                                text: "انتخاب موقعیت مکانی روی نقشه",
+                            SelectButton(onTap: () => Get.to(MapPage(onSelected: (latlang) => controller.setLocation(latlang),)),
+                                text: controller.selectLocation == null? "انتخاب موقعیت مکانی روی نقشه": "موقعیت مکانی با موفقیت انتخاب شد",
                                 showIcon: false),
                             const SizedBox(height: 30),
                             // save address button
-                            ButtonWidget(onPress: (){}, text: "افزودن آدرس")
+                            ButtonWidget(
+                                onPress: controller.addAddress,
+                                loading: controller.loading,
+                                text: "افزودن آدرس")
                           ],
                         ),
                       ))

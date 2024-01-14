@@ -38,9 +38,7 @@ class ProfileRepository extends BaseRepository {
       "postal_code": postalCode
     });
     // show snack bar
-    if(response.statusCode == 200){
-      showSnackBar(message: "آدرس با موفقیت اضافه شد", type: SnackBarType.success);
-    }else{
+    if(response.statusCode != 200){
       showSnackBar(message: "خطایی رخ داده لطفا دوباره امتحان کنید", type: SnackBarType.error);
     }
     return response.statusCode == 200;
