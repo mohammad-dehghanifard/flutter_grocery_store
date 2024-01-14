@@ -49,4 +49,12 @@ class ProfileRepository extends BaseRepository {
     var response = await dio.get("/address");
     return AddressResponse.fromJson(response.data);
   }
+  // delete address
+  Future<bool> deleteAddress({required int id}) async {
+    var response = await dio.delete("/address/$id");
+    if(response.statusCode != 200) {
+      showSnackBar(message: "خطایی رخ داده لطفا دوباره امتحان کنید", type: SnackBarType.error);
+    }
+    return response.statusCode == 200;
+  }
 }
