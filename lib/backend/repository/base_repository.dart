@@ -14,4 +14,8 @@ class BaseRepository {
         "Authorization" : "Bearer ${Get.find<UserHelper>().token}"
       }
   ));
+
+  void getMethod(){
+
+  }
 }

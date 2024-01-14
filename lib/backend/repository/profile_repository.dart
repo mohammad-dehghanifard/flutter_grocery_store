@@ -1,5 +1,6 @@
 import 'package:flutter_grocery_store/backend/models/user_model.dart';
 import 'package:flutter_grocery_store/backend/repository/base_repository.dart';
+import 'package:flutter_grocery_store/backend/response/address_response.dart';
 import 'package:flutter_grocery_store/backend/response/perovince_response.dart';
 import 'package:flutter_grocery_store/helper/widgets/snack_bars.dart';
 
@@ -42,5 +43,10 @@ class ProfileRepository extends BaseRepository {
       showSnackBar(message: "خطایی رخ داده لطفا دوباره امتحان کنید", type: SnackBarType.error);
     }
     return response.statusCode == 200;
+  }
+  // get all address
+  Future<AddressResponse> getAllAddress() async {
+    var response = await dio.get("/address");
+    return AddressResponse.fromJson(response.data);
   }
 }
