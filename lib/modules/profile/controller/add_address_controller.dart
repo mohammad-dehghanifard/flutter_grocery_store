@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_grocery_store/backend/models/address.dart';
 import 'package:flutter_grocery_store/backend/models/city.dart';
 import 'package:flutter_grocery_store/backend/models/province.dart';
 import 'package:flutter_grocery_store/backend/repository/profile_repository.dart';
-import 'package:flutter_grocery_store/backend/response/perovince_response.dart';
+import 'package:flutter_grocery_store/backend/response/province_response.dart';
 import 'package:flutter_grocery_store/helper/widgets/snack_bars.dart';
 import 'package:flutter_grocery_store/modules/profile/controller/address_controller.dart';
 import 'package:get/get.dart';
 
 class AddAddressController extends GetxController {
+  AddAddressController({this.address});
 //========================= variable ===========================================
+  final Address? address;
   final ProfileRepository _repository = ProfileRepository();
   final TextEditingController titleText = TextEditingController();
   final TextEditingController addressText = TextEditingController();
@@ -19,15 +22,22 @@ class AddAddressController extends GetxController {
   Province? province;
   City? city;
   String? selectLocation;
+
 //========================= methods ============================================
   Future<void> getAllProvince() async {
     final response = await _repository.getAllProvince();
+    // select province and city for edit mode
+    if(address != null){
+      province = response.data!.firstWhere((provinceItem) => provinceItem.id == address!.provinceId);
+      city = province!.cities!.firstWhere((cityItem) => cityItem.id == address!.cityId);
+    }
     provinceList = response;
     update();
   }
 
   void onChangeProvince(Province value){
     province = value;
+    city = null;
     update();
   }
 
@@ -57,14 +67,15 @@ class AddAddressController extends GetxController {
     update();
   }
 
-  Future<void> addAddress() async {
+  Future<void> addOrEditAddress() async {
     if(formKey.currentState!.validate()){
       if(city != null){
         loading = true;
         update();
-        await _repository.addNewAddress(
+        await _repository.addOrEditAddress(
+            id: address?.id,
            name: titleText.text,
-           address: "${province?.name} - ${city?.name} - ${addressText.text}",
+           address: addressText.text,
            cityId: city!.id!,
            postalCode: postalCodeText.text,
            latlong: selectLocation
@@ -84,6 +95,13 @@ class AddAddressController extends GetxController {
   @override
   void onInit() {
     getAllProvince();
+    if(address != null){
+      titleText.text = address!.title!;
+      addressText.text = address!.address!;
+      postalCodeText.text = address!.postalCode != null? address!.postalCode!.toString() : "" ;
+      selectLocation = address!.latlong ?? "";
+      update();
+    }
     super.onInit();
   }
 

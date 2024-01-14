@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery_store/backend/models/address.dart';
 import 'package:flutter_grocery_store/helper/widgets/appbar_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/button_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/snack_bars.dart';
@@ -11,19 +12,21 @@ import 'package:flutter_grocery_store/modules/profile/widgets/select_province_bo
 import 'package:get/get.dart';
 
 class AddAddressPage extends StatelessWidget {
-  const AddAddressPage({super.key});
+  const AddAddressPage({super.key, this.address});
+
+  final Address? address;
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       body: SafeArea(
         child: GetBuilder<AddAddressController>(
-          init: AddAddressController(),
+          init: AddAddressController(address: address),
           builder: (controller) {
             return SingleChildScrollView(
               child: controller.provinceList == null? const Center(child: CircularProgressIndicator()) : Column(
                 children: [
-                  const AppBarWidget(title: "افزودن آدرس"),
+                  AppBarWidget(title: address == null? "افزودن آدرس" : "ویرایش آدرس"),
                   Form(
                     key: controller.formKey,
                       child: Padding(
@@ -109,9 +112,9 @@ class AddAddressPage extends StatelessWidget {
                             const SizedBox(height: 30),
                             // save address button
                             ButtonWidget(
-                                onPress: controller.addAddress,
+                                onPress: controller.addOrEditAddress,
                                 loading: controller.loading,
-                                text: "افزودن آدرس")
+                                text: address == null? "افزودن آدرس" : "ویرایش آدرس")
                           ],
                         ),
                       ))

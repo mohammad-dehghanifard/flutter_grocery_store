@@ -45,10 +45,10 @@ class AddressPage extends StatelessWidget {
                             children: [
                               Text(address.title ?? "", style: const TextStyle(fontWeight: FontWeight.bold)),
                               const Spacer(),
-                              // buttons
+                              // edit buttons
                               IconButtonWidget(
                                 icon: Iconsax.edit,
-                                onTap: () {},
+                                onTap: () => Get.to(AddAddressPage(address: address)),
                                 width: 35,
                                 iconColor: Theme.of(context).primaryColor,
                                 height: 35,
@@ -57,6 +57,7 @@ class AddressPage extends StatelessWidget {
                                 iconSize: 18,
                                 radius: 8,
                               ),
+                              // delete button
                               IconButtonWidget(
                                 icon: Iconsax.trash,
                                 onTap: () => controller.deleteAddress(id: address.id!),

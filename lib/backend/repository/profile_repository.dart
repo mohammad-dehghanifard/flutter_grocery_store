@@ -1,7 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_grocery_store/backend/models/user_model.dart';
 import 'package:flutter_grocery_store/backend/repository/base_repository.dart';
 import 'package:flutter_grocery_store/backend/response/address_response.dart';
-import 'package:flutter_grocery_store/backend/response/perovince_response.dart';
+import 'package:flutter_grocery_store/backend/response/province_response.dart';
 import 'package:flutter_grocery_store/helper/widgets/snack_bars.dart';
 
 class ProfileRepository extends BaseRepository {
@@ -30,14 +31,26 @@ class ProfileRepository extends BaseRepository {
     return ProvinceResponse.fromJson(response.data);
   }
   // add new address
-  Future<bool> addNewAddress({required String name,required String address,required int cityId,String? postalCode,String? latlong}) async {
-    var response = await dio.post("/address",data: {
-      "title": name,
-      "city_id": cityId.toString(),
-      "address": address,
-      "latlong": latlong,
-      "postal_code": postalCode
-    });
+  Future<bool> addOrEditAddress({required String name,required String address,required int cityId,String? postalCode,String? latlong,int? id}) async {
+    Response<dynamic> response;
+    if(id == null){
+       response = await dio.post("/address",data: {
+        "title": name,
+        "city_id": cityId.toString(),
+        "address": address,
+        "latlong": latlong,
+        "postal_code": postalCode
+      });
+    }else{
+      response = await dio.put("/address/$id",data: {
+        "title": name,
+        "city_id": cityId.toString(),
+        "address": address,
+        "latlong": latlong,
+        "postal_code": postalCode
+      });
+    }
+
     // show snack bar
     if(response.statusCode != 200){
       showSnackBar(message: "خطایی رخ داده لطفا دوباره امتحان کنید", type: SnackBarType.error);
