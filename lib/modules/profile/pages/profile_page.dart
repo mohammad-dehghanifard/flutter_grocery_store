@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/modules/profile/controller/profile_controller.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/address_page.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/edit_profile_page.dart';
+import 'package:flutter_grocery_store/modules/profile/widgets/dialog_body_widget.dart';
 import 'package:flutter_grocery_store/modules/profile/widgets/profile_button_widget.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:share_plus/share_plus.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -90,14 +92,18 @@ class _ProfilePageState extends State<ProfilePage> with AutomaticKeepAliveClient
                 const SizedBox(height: 15),
                 // share app
                 ProfileButtonWidget(
-                  onTap: () {},
+                  onTap: () {
+                    Share.share("سلام دوست من، من از اپلیکیشن فروشگاه آنلاین استفاده میکنم خیلی باحاله حتما نصبش کن!");
+                  },
                   icon: Iconsax.user_cirlce_add,
                   text: 'دعوت از دوستان',
                 ),
                 const SizedBox(height: 15),
                 // log out
                 ProfileButtonWidget(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(context: context, builder: (context) => const LogOutDialogBodyWidget());
+                  },
                   icon: Icons.logout,
                   text: 'خروج از حساب',
                 ),

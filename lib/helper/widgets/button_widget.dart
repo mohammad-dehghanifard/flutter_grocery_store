@@ -6,6 +6,7 @@ class ButtonWidget extends StatelessWidget {
     this.height = 45,
     this.loading = false,
     this.hasBorder = false,
+    this.showIcon = false,
     required this.onPress,
     required this.text,
     super.key
@@ -17,6 +18,7 @@ class ButtonWidget extends StatelessWidget {
   final Function() onPress;
   final bool loading;
   final bool hasBorder;
+  final bool showIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class ButtonWidget extends StatelessWidget {
           child: CircularProgressIndicator(color: Colors.white,)) : Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if(hasBorder)
+              if(showIcon)
               Padding(
                 padding: const EdgeInsets.only(left: 4.0),
                 child: Icon(Icons.add,size: 20,color: Theme.of(context).primaryColor),

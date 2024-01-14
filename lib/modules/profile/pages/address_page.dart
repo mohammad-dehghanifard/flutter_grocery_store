@@ -101,6 +101,7 @@ class AddressPage extends StatelessWidget {
                   child: ButtonWidget(
                       onPress: () => Get.to(const AddAddressPage()),
                       hasBorder: true,
+                      showIcon: true,
                       text: "افزودن آدرس"
                   ),
                 ),
