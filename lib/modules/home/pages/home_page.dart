@@ -3,6 +3,7 @@ import 'package:flutter_grocery_store/modules/home/controller/home_controller.da
 import 'package:flutter_grocery_store/modules/home/pages/dashboard_page.dart';
 import 'package:flutter_grocery_store/modules/home/widgets/button_navigation.dart';
 import 'package:flutter_grocery_store/modules/home/widgets/home_app_bar_widget.dart';
+import 'package:flutter_grocery_store/modules/profile/pages/bookmark_page.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/profile_page.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +32,7 @@ class HomePage extends StatelessWidget {
                     const DashboardPage(),
                     const CategoryPage(),
                     Container(color: Colors.blue),
-                    Container(color: Colors.orange),
+                    const BookMarkPage(),
                     const ProfilePage()
                   ],
                 )),
