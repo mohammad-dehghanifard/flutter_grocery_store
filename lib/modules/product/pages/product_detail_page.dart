@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/helper/widgets/icon_button_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/appbar_widget.dart';
@@ -12,25 +13,34 @@ import 'product_comment_page.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key, required this.id});
+
   final int id;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: GetBuilder<ProductDetailController>(
-          init: ProductDetailController(productId: id),
-          builder: (controller) {
-            return Column(
-              children: [
-                AppBarWidget(action: IconButtonWidget(icon: Iconsax.heart,onTap: (){})),
-                Expanded(
-                    child: controller.product == null
-                        ? const Center(child: CircularProgressIndicator())
-                        : SingleChildScrollView(
+            init: ProductDetailController(productId: id),
+            builder: (controller) {
+              return controller.product == null
+                  ? const Center(child: CircularProgressIndicator())
+                  : Column(
+                      children: [
+                        AppBarWidget(
+                            action: IconButtonWidget(
+                                iconColor: controller.product!.bookMarked! ? const Color(0xFFED723F) : null,
+                                icon:  controller.product!.bookMarked!? CupertinoIcons.heart_fill : Iconsax.heart,
+                                onTap: () => controller.addProductToBookMarkList()
+                            )),
+                        Expanded(
+                          child: SingleChildScrollView(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                 ProductSliderWidget(imageList: controller.product!.gallery ?? []),
+                                ProductSliderWidget(
+                                    imageList:
+                                        controller.product!.gallery ?? []),
                                 // category and realPrice
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -38,51 +48,65 @@ class ProductDetailPage extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       // category
-                                      Text("دسته بندی:  ${controller.product!.category}",
+                                      Text(
+                                          "دسته بندی:  ${controller.product!.category}",
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColor)),
                                       const Spacer(),
-                                       // real price and off tag
-                                       Visibility(
-                                         visible: controller.product!.discountPercent != 0,
-                                         child: Row(
-                                           children: [
-                                             Text(controller.product!.realPrice.toString(),
-                                                 style: const TextStyle(
-                                                     fontSize: 14,
-                                                     fontWeight: FontWeight.normal,
-                                                     color: Color(0xFF8C8C8C),
-                                                     decoration:
-                                                     TextDecoration.lineThrough)),
-                                             Container(
-                                               margin: const EdgeInsets.only(right: 4),
-                                               padding: const EdgeInsets.symmetric(
-                                                   horizontal: 4),
-                                               decoration: BoxDecoration(
-                                                   color: const Color(0xFFFF3D3D),
-                                                   borderRadius:
-                                                   BorderRadius.circular(4)),
-                                               child: const Text("30%",
-                                                   style: TextStyle(
-                                                       color: Colors.white,
-                                                       fontSize: 9,
-                                                       fontWeight: FontWeight.normal)),
-                                             ),
-                                           ],
-                                         ),
-                                       )
+                                      // real price and off tag
+                                      Visibility(
+                                        visible: controller
+                                                .product!.discountPercent !=
+                                            0,
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                                controller.product!.realPrice
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: Color(0xFF8C8C8C),
+                                                    decoration: TextDecoration
+                                                        .lineThrough)),
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                  right: 4),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 4),
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                      const Color(0xFFFF3D3D),
+                                                  borderRadius:
+                                                      BorderRadius.circular(4)),
+                                              child: const Text("30%",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 9,
+                                                      fontWeight:
+                                                          FontWeight.normal)),
+                                            ),
+                                          ],
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
                                 // price and name
-                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Row(
                                     children: [
                                       SizedBox(
-                                        width: MediaQuery.sizeOf(context).width * 0.6,
-                                        child: Text(controller.product!.title ?? "",
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                0.6,
+                                        child: Text(
+                                            controller.product!.title ?? "",
                                             overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
                                                 fontSize: 18,
@@ -105,7 +129,7 @@ class ProductDetailPage extends StatelessWidget {
                                   ),
                                 ),
                                 // description
-                                 Padding(
+                                Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 10),
                                   child: Text(
@@ -117,23 +141,20 @@ class ProductDetailPage extends StatelessWidget {
                                 ),
                                 // commentButton
                                 CommentButtonWidget(
-                                    onTap: () =>  Get.to(ProductCommentPage(productId: id)),
-                                    reviewCount: controller.product!.reviewCount ?? 0)
+                                    onTap: () => Get.to(
+                                        ProductCommentPage(productId: id)),
+                                    reviewCount:
+                                        controller.product!.reviewCount ?? 0)
                               ],
                             ),
                           ),
-                  ),
-                // add to cart button
-                const AddProductToCartWidget()
-              ],
-            );
-          }
-        ),
+                        ),
+                        // add to cart button
+                        const AddProductToCartWidget()
+                      ],
+                    );
+            }),
       ),
     );
   }
 }
-
-
-
-
