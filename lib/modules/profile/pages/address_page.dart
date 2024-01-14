@@ -59,7 +59,7 @@ class AddressPage extends StatelessWidget {
                               ),
                               IconButtonWidget(
                                 icon: Iconsax.trash,
-                                onTap: () {},
+                                onTap: () => controller.deleteAddress(id: address.id!),
                                 width: 35,
                                 iconColor: Theme.of(context).primaryColor,
                                 height: 35,
