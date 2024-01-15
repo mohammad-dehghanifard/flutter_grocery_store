@@ -11,6 +11,7 @@ class ProductDetailController extends GetxController {
   final ProductRepository _productRepository = ProductRepository();
   final ProfileRepository _profileRepository = ProfileRepository();
   Product? product;
+  bool loading = false;
 
 //========================= methods ============================================
 
@@ -29,6 +30,15 @@ class ProductDetailController extends GetxController {
       }
       update();
     }
+  }
+
+  Future<void> addToCart({bool increment = true}) async {
+    loading = true;
+    update();
+    var response = await _productRepository.addProductToCartApi(productId: productId, increment: increment);
+    product!.cartCount = response;
+    loading = false;
+    update();
   }
 
 //========================= life cycle =========================================

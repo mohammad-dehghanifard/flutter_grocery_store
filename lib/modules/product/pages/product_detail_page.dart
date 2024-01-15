@@ -150,7 +150,7 @@ class ProductDetailPage extends StatelessWidget {
                           ),
                         ),
                         // add to cart button
-                        const AddProductToCartWidget()
+                        AddProductToCartWidget(controller: controller)
                       ],
                     );
             }),
