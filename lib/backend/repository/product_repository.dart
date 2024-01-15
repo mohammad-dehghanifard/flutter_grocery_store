@@ -4,6 +4,7 @@ import 'package:flutter_grocery_store/backend/response/category_response.dart';
 import 'package:flutter_grocery_store/backend/response/dash_board_response.dart';
 import 'package:flutter_grocery_store/backend/response/product_response.dart';
 import 'package:flutter_grocery_store/backend/response/review_response.dart';
+import 'package:flutter_grocery_store/helper/widgets/snack_bars.dart';
 
 class ProductRepository extends BaseRepository {
   
@@ -55,5 +56,18 @@ class ProductRepository extends BaseRepository {
       "comment" : text
     });
     return response.statusCode == 200;
+  }
+  // add product to cart
+  Future<int> addProductToCartApi({required productId,required bool increment}) async {
+    var response = await dio.post("/add-to-cart",data: {
+      "product_id": productId,
+      "increment": increment
+    });
+    if(response.statusCode != 200){
+      showSnackBar(
+          message: "خطایی رخ داده لطفا دوباره امتحان کنید",
+          type: SnackBarType.error);
+    }
+    return response.data['count'] ?? 0;
   }
 }
