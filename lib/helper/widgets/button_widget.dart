@@ -24,7 +24,7 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       minWidth: double.infinity,
-      height: 45,
+      height: height,
       color: hasBorder? Colors.transparent : Theme.of(context).primaryColor,
       elevation: 0,
       highlightElevation: 0,

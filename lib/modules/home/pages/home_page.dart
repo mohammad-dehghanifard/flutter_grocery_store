@@ -4,6 +4,7 @@ import 'package:flutter_grocery_store/modules/home/pages/dashboard_page.dart';
 import 'package:flutter_grocery_store/modules/home/widgets/button_navigation.dart';
 import 'package:flutter_grocery_store/modules/home/widgets/home_app_bar_widget.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/bookmark_page.dart';
+import 'package:flutter_grocery_store/modules/profile/pages/cart_page.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/profile_page.dart';
 import 'package:get/get.dart';
 
@@ -28,12 +29,12 @@ class HomePage extends StatelessWidget {
                     child: PageView(
                     controller: controller.pageController,
                     physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                    const DashboardPage(),
-                    const CategoryPage(),
-                    Container(color: Colors.blue),
-                    const BookMarkPage(),
-                    const ProfilePage()
+                    children: const [
+                    DashboardPage(),
+                    CategoryPage(),
+                    CartPage(),
+                    BookMarkPage(),
+                    ProfilePage()
                   ],
                 )),
                 // button navigation
