@@ -4,7 +4,7 @@ import 'package:flutter_grocery_store/modules/home/pages/dashboard_page.dart';
 import 'package:flutter_grocery_store/modules/home/widgets/button_navigation.dart';
 import 'package:flutter_grocery_store/modules/home/widgets/home_app_bar_widget.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/bookmark_page.dart';
-import 'package:flutter_grocery_store/modules/profile/pages/cart_page.dart';
+import 'package:flutter_grocery_store/modules/product/pages/cart_page.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/profile_page.dart';
 import 'package:get/get.dart';
 

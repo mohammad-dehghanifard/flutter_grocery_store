@@ -18,12 +18,31 @@ class HomeAppBarWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           // bag
-          AppBarButton(onTap: () {},icon: Iconsax.bag_2),
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: AppBarButton(onTap: () {},icon: Iconsax.bag_2),
+              ),
+              Container(
+                width: 16,
+                height: 16,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFFFF6060)
+                ),
+                child: const Center(child: Text("2",style: TextStyle(fontSize: 12,color: Colors.white),)),
+              )
+            ],
+          ),
           const Spacer(),
           Image.asset("assets/images/logo_horiz.png",height: 45,),
           const Spacer(),
           // search
-          AppBarButton(onTap: () => Get.to(const ProductListPage()),icon: Iconsax.search_normal),
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: AppBarButton(onTap: () => Get.to(const ProductListPage()),icon: Iconsax.search_normal),
+          ),
         ],
       ),
     );
