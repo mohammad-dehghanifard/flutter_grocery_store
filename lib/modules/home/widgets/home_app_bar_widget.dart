@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery_store/modules/product/controller/cart_controller.dart';
 import 'package:flutter_grocery_store/modules/product/pages/product_list_page.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -24,14 +25,22 @@ class HomeAppBarWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 6),
                 child: AppBarButton(onTap: () {},icon: Iconsax.bag_2),
               ),
-              Container(
-                width: 16,
-                height: 16,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(0xFFFF6060)
-                ),
-                child: const Center(child: Text("2",style: TextStyle(fontSize: 12,color: Colors.white),)),
+              GetBuilder<CartController>(
+                init: CartController(),
+                builder: (controller) {
+                  return Container(
+                    width: 16,
+                    height: 16,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFFF6060)
+                    ),
+                    child:  Center(
+                        child: controller.cartResponse == null? const SizedBox(height: 8,width: 8,child: CircularProgressIndicator(strokeWidth: 1,color: Colors.white,))
+                            :  Text(controller.cartResponse!.totalItems.toString(),style: const TextStyle(fontSize: 12,color: Colors.white),
+                        )),
+                  );
+                }
               )
             ],
           ),

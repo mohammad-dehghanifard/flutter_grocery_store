@@ -6,11 +6,22 @@ class CartController extends GetxController {
 //========================= variable ===========================================
   final ProductRepository _productRepository = ProductRepository();
   CartResponse? cartResponse;
+  bool loading = false;
 
 //========================= methods ============================================
   Future<void> getAllCartItem() async {
     var response = await _productRepository.getAllProductInCartApi();
     cartResponse = response;
+    update();
+  }
+
+  Future<void> changeCartItemCount({bool increment = true,bool delete = false,required int productId}) async {
+    loading = true;
+    update();
+     await _productRepository.addProductToCartApi(productId: productId, increment: increment,delete: delete);
+    getAllCartItem();
+    loading = false;
+    Get.find<CartController>().getAllCartItem();
     update();
   }
 

@@ -58,10 +58,11 @@ class ProductRepository extends BaseRepository {
     return response.statusCode == 200;
   }
   // add product to cart
-  Future<int> addProductToCartApi({required productId,required bool increment}) async {
+  Future<int> addProductToCartApi({required int productId,required bool increment,bool delete = false}) async {
     var response = await dio.post("/add-to-cart",data: {
-      "product_id": productId,
-      "increment": increment
+      "product_id": productId.toString(),
+      "increment": increment,
+      "delete" : delete
     });
     if(response.statusCode != 200){
       showSnackBar(
