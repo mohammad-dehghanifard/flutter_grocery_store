@@ -13,6 +13,14 @@ class OrderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      // payment button
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ButtonWidget(
+          onPress: () {},
+          height: 52,
+          text: "پرداخت آنلاین"),
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +58,140 @@ class OrderPage extends StatelessWidget {
 
                       const Text("شیوه ارسال را انتخاب کنید",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 16)),
                       // Shipping select
-                      const ShippingRadioButtonWidget()
+                      const ShippingRadioButtonWidget(),
+                      const SizedBox(height: 20),
+                      // price card
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: const Color(0xFFEBEBEB),width: 1),
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Theme.of(context).primaryColor.withOpacity(0.15),
+                                blurRadius: 3,offset: const Offset(0,1)
+                            )
+                          ],
+                        ),
+                        child:  Column(
+                          children: [
+                            // shipping price
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: Row(
+                                children: [
+                                  Text( "هزینه ارسال",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8C8C8C))),
+                                  Spacer(),
+                                  Text( "۲۰,۰۰۰",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  SizedBox(width: 4),
+                                  Text("تومان",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8C8C8C))),
+
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            // price
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: Row(
+                                children: [
+                                  Text( "مبلغ:",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8C8C8C))),
+                                  Spacer(),
+                                  Text( "۱۱۰,۰۰۰",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  SizedBox(width: 4),
+                                  Text("تومان",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8C8C8C))),
+
+                                ],
+                              ),
+                            ),
+                            // discount
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: Row(
+                                children: [
+                                  Text( "مبلغ تخفیف:",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8C8C8C))),
+                                  Spacer(),
+                                  Text( "۱۰,۰۰۰",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color((0xFFFC7878))
+                                      )),
+                                  SizedBox(width: 4),
+                                  Text("تومان",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8C8C8C))),
+
+                                ],
+                              ),
+                            ),
+                            // final price
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 6),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border(top: BorderSide(color: Theme.of(context).dividerColor)),
+                                  borderRadius: const BorderRadius.only(
+                                      bottomRight: Radius.circular(16),
+                                      bottomLeft: Radius.circular(16)
+                                  )
+                              ),
+                              child:  const Row(
+                                children: [
+                                  Text( "مبلغ:",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8C8C8C))),
+                                  Spacer(),
+                                  Text( "۱۲۰,۰۰۰",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  SizedBox(width: 4),
+                                  Text("تومان",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8C8C8C))),
+
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ));
