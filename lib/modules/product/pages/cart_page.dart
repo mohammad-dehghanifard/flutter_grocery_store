@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/backend/models/product.dart';
 import 'package:flutter_grocery_store/helper/widgets/button_widget.dart';
 import 'package:flutter_grocery_store/modules/product/controller/cart_controller.dart';
+import 'package:flutter_grocery_store/modules/product/pages/order_page.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -296,7 +297,9 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin 
               ),
               SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
               // save order button
-              ButtonWidget(onPress: () {},height: 52, text: "ثبت سفارش")
+              ButtonWidget(
+                  onPress: () => Get.to(const OrderPage()),
+                  height: 52, text: "ثبت سفارش")
             ],
           );
         }
