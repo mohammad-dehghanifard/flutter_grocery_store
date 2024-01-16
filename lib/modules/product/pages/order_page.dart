@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery_store/backend/models/address.dart';
 import 'package:flutter_grocery_store/helper/widgets/appbar_widget.dart';
 import 'package:flutter_grocery_store/helper/widgets/button_widget.dart';
+import 'package:flutter_grocery_store/modules/product/controller/cart_controller.dart';
 import 'package:flutter_grocery_store/modules/product/controller/order_controller.dart';
 import 'package:flutter_grocery_store/modules/product/widgets/shipping_radio_button_widget.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/add_address_page.dart';
@@ -43,9 +45,16 @@ class OrderPage extends StatelessWidget {
                       // address List
                       Column(
                         children: List.generate(controller.addressResponse!.data!.length,
-                        (index) => AddressListItemWidget(
-                            address: controller.addressResponse!.data![index],
-                            onDelete: ()=>controller.deleteAddress(id: controller.addressResponse!.data![index].id!))),
+                        (index) {
+                          final Address address = controller.addressResponse!.data![index];
+                          return GestureDetector(
+                          onTap: () => controller.onChangeAddress(address),
+                          child: AddressListItemWidget(
+                              address: address,
+                              selected: address.id == controller.selectedAddress?.id,
+                              onDelete: () => controller.deleteAddress(id: address.id!)),
+                        );
+                        }),
                       ),
                       // add address button
                       ButtonWidget(
@@ -76,23 +85,23 @@ class OrderPage extends StatelessWidget {
                         child:  Column(
                           children: [
                             // shipping price
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
+                             Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 children: [
-                                  Text( "هزینه ارسال",
+                                  const Text( "هزینه ارسال",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.normal,
                                           color: Color(0xFF8C8C8C))),
-                                  Spacer(),
-                                  Text( "۲۰,۰۰۰",
-                                      style: TextStyle(
+                                  const Spacer(),
+                                  Text( controller.shippingMethod?.price ?? "0",
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       )),
-                                  SizedBox(width: 4),
-                                  Text("تومان",
+                                  const SizedBox(width: 4),
+                                  const Text("تومان",
                                       style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
@@ -103,23 +112,23 @@ class OrderPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             // price
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
+                             Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 children: [
-                                  Text( "مبلغ:",
+                                  const Text( "مبلغ:",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.normal,
                                           color: Color(0xFF8C8C8C))),
-                                  Spacer(),
-                                  Text( "۱۱۰,۰۰۰",
-                                      style: TextStyle(
+                                  const Spacer(),
+                                  Text( Get.find<CartController>().cartResponse!.price!,
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       )),
-                                  SizedBox(width: 4),
-                                  Text("تومان",
+                                  const SizedBox(width: 4),
+                                  const Text("تومان",
                                       style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
@@ -129,24 +138,24 @@ class OrderPage extends StatelessWidget {
                               ),
                             ),
                             // discount
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
+                             Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 children: [
-                                  Text( "مبلغ تخفیف:",
+                                  const Text( "مبلغ تخفیف:",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.normal,
                                           color: Color(0xFF8C8C8C))),
-                                  Spacer(),
-                                  Text( "۱۰,۰۰۰",
-                                      style: TextStyle(
+                                  const Spacer(),
+                                  Text( Get.find<CartController>().cartResponse!.discountPrice!,
+                                      style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                           color: Color((0xFFFC7878))
                                       )),
-                                  SizedBox(width: 4),
-                                  Text("تومان",
+                                  const SizedBox(width: 4),
+                                  const Text("تومان",
                                       style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
@@ -166,21 +175,21 @@ class OrderPage extends StatelessWidget {
                                       bottomLeft: Radius.circular(16)
                                   )
                               ),
-                              child:  const Row(
+                              child:   Row(
                                 children: [
-                                  Text( "مبلغ:",
+                                  const Text( "مبلغ کل :",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.normal,
                                           color: Color(0xFF8C8C8C))),
-                                  Spacer(),
-                                  Text( "۱۲۰,۰۰۰",
-                                      style: TextStyle(
+                                  const Spacer(),
+                                  Text( controller.calculateTotalPrice(),
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       )),
-                                  SizedBox(width: 4),
-                                  Text("تومان",
+                                  const SizedBox(width: 4),
+                                  const Text("تومان",
                                       style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,

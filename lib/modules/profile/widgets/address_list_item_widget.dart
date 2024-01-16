@@ -6,19 +6,21 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AddressListItemWidget extends StatelessWidget {
-  const AddressListItemWidget({super.key, required this.address, required this.onDelete});
+  const AddressListItemWidget({super.key, required this.address, required this.onDelete,this.selected = false});
   final Address address;
   final Function() onDelete;
+  final bool selected;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.only(bottom: 15),
       width: MediaQuery.sizeOf(context).width,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFEBEBEB))),
+          border: Border.all(color: selected ? Theme.of(context).primaryColor : const Color(0xFFEBEBEB))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
