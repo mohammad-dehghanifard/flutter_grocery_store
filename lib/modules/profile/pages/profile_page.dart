@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/modules/profile/controller/profile_controller.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/address_page.dart';
 import 'package:flutter_grocery_store/modules/profile/pages/edit_profile_page.dart';
+import 'package:flutter_grocery_store/modules/profile/pages/order_history_page.dart';
 import 'package:flutter_grocery_store/modules/profile/widgets/dialog_body_widget.dart';
 import 'package:flutter_grocery_store/modules/profile/widgets/profile_button_widget.dart';
 import 'package:get/get.dart';
@@ -85,7 +86,7 @@ class _ProfilePageState extends State<ProfilePage> with AutomaticKeepAliveClient
                 const SizedBox(height: 15),
                 // orders
                 ProfileButtonWidget(
-                  onTap: () {},
+                  onTap: () => Get.to(const OrderHistoryPage()),
                   icon: Iconsax.shopping_bag,
                   text: 'سفارشات',
                 ),
