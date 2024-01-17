@@ -57,7 +57,7 @@ class AddressListItemWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           // address
-          Text(address.address ?? "",style: const TextStyle(color: Color(0xFF8C8C8C)),
+          Text("${address.province}، ${address.city}، ${address.address}",style: const TextStyle(color: Color(0xFF8C8C8C)),
           ),
           // postal code
           Visibility(

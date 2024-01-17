@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery_store/modules/home/controller/home_controller.dart';
 import 'package:flutter_grocery_store/modules/product/controller/cart_controller.dart';
 import 'package:flutter_grocery_store/modules/product/pages/product_list_page.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,9 @@ class HomeAppBarWidget extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 6),
-                child: AppBarButton(onTap: () {},icon: Iconsax.bag_2),
+                child: AppBarButton(onTap: () {
+                  Get.find<HomeController>().changePage(2);
+                },icon: Iconsax.bag_2),
               ),
               GetBuilder<CartController>(
                 init: CartController(),
