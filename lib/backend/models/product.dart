@@ -11,6 +11,7 @@ class Product {
   String? realPrice;
   int? discountPercent;
   int? cartCount;
+  int? count;
 
   Product(
       {this.id,
@@ -39,6 +40,7 @@ class Product {
     cartCount = json["cart_count"];
     image = json['image'];
     price = json['price'];
+    count = json['count'];
     realPrice = json['real_price'];
     discountPercent = json['discount_percent'];
   }
