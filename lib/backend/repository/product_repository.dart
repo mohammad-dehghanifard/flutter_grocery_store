@@ -3,6 +3,7 @@ import 'package:flutter_grocery_store/backend/repository/base_repository.dart';
 import 'package:flutter_grocery_store/backend/response/cart_response.dart';
 import 'package:flutter_grocery_store/backend/response/category_response.dart';
 import 'package:flutter_grocery_store/backend/response/dash_board_response.dart';
+import 'package:flutter_grocery_store/backend/response/order_response.dart';
 import 'package:flutter_grocery_store/backend/response/product_response.dart';
 import 'package:flutter_grocery_store/backend/response/review_response.dart';
 import 'package:flutter_grocery_store/helper/widgets/snack_bars.dart';
@@ -89,5 +90,15 @@ class ProductRepository extends BaseRepository {
       "platform": "android"
     });
     return response.data['payment_link'];
+  }
+  // get all orders
+  Future<OrderResponse> getAllOrdersApi() async {
+    var response = await dio.get("/order");
+    if(response.statusCode != 200){
+      showSnackBar(
+          message: "خطایی رخ داده لطفا دوباره امتحان کنید",
+          type: SnackBarType.error);
+    }
+    return OrderResponse.fromJson(response.data);
   }
 }
