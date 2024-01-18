@@ -1,3 +1,4 @@
+// ignore_for_file: library_private_types_in_public_api
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/backend/models/order.dart';
 import 'package:flutter_grocery_store/helper/widgets/appbar_widget.dart';
@@ -6,6 +7,17 @@ import 'package:get/get.dart';
 
 class OrderHistoryPage extends StatelessWidget {
   const OrderHistoryPage({super.key});
+
+  _OrderStatus _getOrderStatus(String status){
+    if(status == "پرداخت شده" || status == "در حال پرداخت"){
+      return _OrderStatus(bgColor: const Color(0XFF2AC066), txtColor: Colors.white);
+    } else if(status == "در حال آماده سازی"){
+      return _OrderStatus(bgColor: const Color(0XFFFEEBEB), txtColor: const Color(0XFFF31A1A));
+    } else if(status == "لغو شده") {
+      return _OrderStatus(bgColor: const Color(0XFFF31A1A), txtColor: Colors.white);
+    }
+    return _OrderStatus(bgColor: const Color(0XFF2AC066), txtColor: Colors.white);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +89,7 @@ class OrderHistoryPage extends StatelessWidget {
                                         ),
                                         // item count
                                         Visibility(
-                                          visible:order.products![index].count! < 1 ,
+                                          visible:order.products![index].count! > 1 ,
                                           child: Container(
                                             width: 14,
                                             height: 14,
@@ -105,7 +117,7 @@ class OrderHistoryPage extends StatelessWidget {
                                 // price
                                 const Text("قیمت سفارش",style: TextStyle(color: Color(0xFF8C8C8C),fontSize: 13)),
                                 const SizedBox(width: 8),
-                                Text(order.totalPrice.toString(),style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text(order.totalPrice.toString(),style: const TextStyle(fontWeight: FontWeight.bold)),
                                 const SizedBox(width: 4),
                                 const Text("تومان",style: TextStyle(color: Color(0xFF8C8C8C),fontSize: 13)),
                                 const Spacer(),
@@ -113,10 +125,10 @@ class OrderHistoryPage extends StatelessWidget {
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
                                   decoration:  BoxDecoration(
-                                    color: const Color(0xFF2AC066),
+                                    color: _getOrderStatus(order.status!).bgColor,
                                     borderRadius: BorderRadius.circular(6)
                                   ),
-                                  child: const Text("تحویل داده شده",style: TextStyle(fontSize: 12,color: Colors.white)),
+                                  child:  Text("تحویل داده شده",style: TextStyle(fontSize: 12,color: _getOrderStatus(order.status!).txtColor,)),
                                 )
 
                               ],
@@ -133,4 +145,10 @@ class OrderHistoryPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class _OrderStatus {
+  _OrderStatus({required this.bgColor,required this.txtColor});
+  final Color bgColor;
+  final Color txtColor;
 }
