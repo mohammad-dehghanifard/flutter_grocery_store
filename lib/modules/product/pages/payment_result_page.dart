@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery_store/helper/widgets/button_widget.dart';
+import 'package:flutter_grocery_store/modules/profile/pages/order_history_page.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class PaymentResultPage extends StatelessWidget {
@@ -35,7 +37,7 @@ class PaymentResultPage extends StatelessWidget {
                 Text(id,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 28),),
                 const Spacer(),
                 ButtonWidget(
-                  onPress: () {},
+                  onPress: () => Get.off(const OrderHistoryPage()),
                   text: "لیست سفارشات",
                 )
               ],
